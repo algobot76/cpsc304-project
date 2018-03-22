@@ -1,5 +1,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
+<script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+  
+<script type="text/javascript">
+//    This makes any input become 1 if focus is removed from it AND it contains nothing: 
+//    Allows for no blank inputs to be sent
+    $(document).ready(function(){
+        $(".int_val").map(function(){
+            $(this).blur(function() { 
+                if( $(this).val() == '') {
+                    $(this).val(1); 
+                }
+            }).val(1)
+        })
+    });
+</script>
+
 <%-- 
     Document   : index
     Created on : 11-Mar-2018, 6:31:20 PM
@@ -34,7 +50,6 @@
                     <td><form action="response.jsp">
                             <strong>Choose Property Type</strong>
                             <select name="type_id">
-                                    <option value="both">Rental or Sale</option>
                                     <option value="rental">Rental</option>
                                     <option value="sale">Sale</option>
                             </select>
@@ -42,10 +57,26 @@
                             
                             <strong>Search by price range:</strong>
                             <strong>From</strong>
-                            <input type="text" name="price_from" value="" />
+                            <input class="int_val" type="text" name="price_from" value="" />
                             
                             <strong>To</strong>
-                            <input type="text" name="price_to" value="" />
+                            <input class="int_val" type="text" name="price_to" value="" />
+                            
+                            <br></br>
+
+                            <strong>Search by footage:</strong>
+                            <strong>From</strong>
+                            <input class="int_val" type="text" name="sqft_from" value="" />
+                            
+                            <strong>To</strong>
+                            <input class="int_val" type="text" name="sqft_to" value="" />
+                            
+                            <br></br>
+                            
+                            <strong>Search by address:</strong>
+                            <input type="text" name="addr_input" value="" />
+
+                            
 <!--                            <strong>Search by price range:</strong>
                             <select name="price_id">
                                     <option value="range0">Unlimited</option>
@@ -55,14 +86,14 @@
                                     <option value="range4">> 1 000 000</option>
                             </select> -->
                            
-                            <br></br>
+<!--                            <br></br>
                             <strong>Search by footage:</strong>
                             <select name="sqft_id">
                                     <option value="footage0">Unlimited</option>
                                     <option value="footage1">< 1000 </option>
                                     <option value="footage2">1000 - 2500</option>
                                     <option value="footage3">> 2500</option>
-                            </select>
+                            </select>-->
                             <br></br>
                             <input type="submit" value="submit" name="submit" />
                         </form>

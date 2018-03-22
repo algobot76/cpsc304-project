@@ -1,5 +1,7 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <%-- 
     Document   : repsonse.jsp
     Created on : 11-Mar-2018, 6:47:08 PM
@@ -7,18 +9,32 @@
 --%>
 <%
     String typeId = request.getParameter("type_id");
+    String address = request.getParameter("addr_input");
     String tableToJoin = typeId.equals("rental") ? "ForRent" : "ForSale";
+    String priceType = tableToJoin.equals("ForRent") ? "rent" : "price";
     
-    String sqlString = "select * from Property INNER JOIN {{tableName}} on {{tableName}}.property_id = Property.property_id;";
+    Integer priceFrom = Integer.parseInt(request.getParameter("price_from"));
+    Integer priceTo = Integer.parseInt(request.getParameter("price_to"));
+    
+    Integer sqftFrom = Integer.parseInt(request.getParameter("sqft_from"));
+    Integer sqftTo = Integer.parseInt(request.getParameter("sqft_to"));
+    
+    String sqlString = "select Property.*, {{tableName}}.{{priceType}} "
+                        + "from Property "
+                        + "INNER JOIN {{tableName}} on "
+                        + "{{tableName}}.property_id = Property.property_id "
+                        + "WHERE ( {{priceType}} BETWEEN " + priceFrom + " AND " + priceTo + ")"
+                        + " AND ( {{priceType}} BETWEEN " + sqftFrom + " AND " + sqftTo + ")";
+    sqlString = sqlString.replace("{{priceType}}", priceType);
     sqlString = sqlString.replace("{{tableName}}", tableToJoin);
+    System.out.println("here is the input " + priceFrom.getClass().getName() + ", " + priceTo.getClass().getName() + ", " + sqftTo.getClass().getName() + ", " + sqftFrom.getClass().getName());
     System.out.println(sqlString);
+
     pageContext.setAttribute("sqlString", sqlString);
 %>
 <sql:query var="propertyQuery" dataSource="jdbc/RentalSite">
     <c:out value="${sqlString}"/>
 </sql:query>
-    
-<%--<c:set var="propertyDetails" value="${propertyQuery.rows[0]}"/>--%>
     
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,7 +59,6 @@
                             ${row.price}
                         </div>
                     </div>
-                    
                 </li>
             </c:forEach>
         </ul>

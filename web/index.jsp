@@ -39,15 +39,21 @@
                                     <option value="sale">Sale</option>
                             </select>
                             <br></br>
-                           
+                            
                             <strong>Search by price range:</strong>
+                            <strong>From</strong>
+                            <input type="text" name="price_from" value="" />
+                            
+                            <strong>To</strong>
+                            <input type="text" name="price_to" value="" />
+<!--                            <strong>Search by price range:</strong>
                             <select name="price_id">
                                     <option value="range0">Unlimited</option>
                                     <option value="range1">< 100 000</option>
                                     <option value="range2">100 000 - 500 000</option>
                                     <option value="range3">500 000 - 1 000 000</option>
                                     <option value="range4">> 1 000 000</option>
-                            </select> 
+                            </select> -->
                            
                             <br></br>
                             <strong>Search by footage:</strong>

@@ -24,7 +24,7 @@
                         + "INNER JOIN {{tableName}} on "
                         + "{{tableName}}.property_id = Property.property_id "
                         + "WHERE ( {{priceType}} BETWEEN " + priceFrom + " AND " + priceTo + ")"
-                        + " AND ( {{priceType}} BETWEEN " + sqftFrom + " AND " + sqftTo + ")";
+                        + " AND ( sq_ft BETWEEN + " + sqftFrom + " AND " + sqftTo + ")";
     sqlString = sqlString.replace("{{priceType}}", priceType);
     sqlString = sqlString.replace("{{tableName}}", tableToJoin);
     System.out.println("here is the input " + priceFrom.getClass().getName() + ", " + priceTo.getClass().getName() + ", " + sqftTo.getClass().getName() + ", " + sqftFrom.getClass().getName());

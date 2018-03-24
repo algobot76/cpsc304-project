@@ -73,27 +73,20 @@
                             
                             <br></br>
                             
-                            <strong>Search by address:</strong>
-                            <input type="text" name="addr_input" value="" />
-
+                            <strong>Search by city</strong>
+                            <input type="text" name="city_input" value="" />
                             
-<!--                            <strong>Search by price range:</strong>
-                            <select name="price_id">
-                                    <option value="range0">Unlimited</option>
-                                    <option value="range1">< 100 000</option>
-                                    <option value="range2">100 000 - 500 000</option>
-                                    <option value="range3">500 000 - 1 000 000</option>
-                                    <option value="range4">> 1 000 000</option>
-                            </select> -->
+                            <br></br>
+                            
+                            <strong>Number of beds</strong>
+                            <input type="text" name="city_input" value="" />
+                            
+                            <br></br>
+                            
+                            <strong>Number of baths</strong>
+                            <input type="text" name="city_input" value="" />
+
                            
-<!--                            <br></br>
-                            <strong>Search by footage:</strong>
-                            <select name="sqft_id">
-                                    <option value="footage0">Unlimited</option>
-                                    <option value="footage1">< 1000 </option>
-                                    <option value="footage2">1000 - 2500</option>
-                                    <option value="footage3">> 2500</option>
-                            </select>-->
                             <br></br>
                             <input type="submit" value="submit" name="submit" />
                         </form>

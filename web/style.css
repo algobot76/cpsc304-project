@@ -50,3 +50,14 @@ a:link:hover {
    font-weight: normal;
    text-decoration: underline;
 }
+
+div {
+    background: lightblue;
+    bordercolor:black;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li { margin: 0 0 .2em 0; }

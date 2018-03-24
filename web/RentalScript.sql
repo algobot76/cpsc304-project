@@ -25,11 +25,11 @@ DROP TABLE IF EXISTS `PostalCode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PostalCode` (
-  `postal_code` char(7) NOT NULL,
-  `city` char(50) DEFAULT NULL,
-  `province` char(2) DEFAULT NULL,
-  PRIMARY KEY (`postal_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    `postal_code` CHAR(7) NOT NULL,
+    `city` CHAR(50) DEFAULT NULL,
+    `province` CHAR(2) DEFAULT NULL,
+    PRIMARY KEY (`postal_code`)
+)  ENGINE=INNODB DEFAULT CHARSET=LATIN1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `PostalCode` (
 
 LOCK TABLES `PostalCode` WRITE;
 /*!40000 ALTER TABLE `PostalCode` DISABLE KEYS */;
-INSERT INTO `PostalCode` VALUES ('k1p 5m7','ottawa','on'),('t2e 6j8','calgary','ab');
+INSERT INTO `PostalCode` VALUES ('l5a 1v9','cooksville','on'),('m5h 1p6','toronto','on'),('t5j 3n2','edmonton','ab'),('t6h 2r1','fort mcmurray','ab'),('v3a 1z3','langley','bc'),('v6m 3w5','vancouver','bc'),('v6s 2h2','vancouver','bc'),('v6t 1z4','vancouver','bc'),('v6x 2b8','richmond','bc'),('v8w 2h9','victoria','bc');
 /*!40000 ALTER TABLE `PostalCode` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,4 +76,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-24 12:32:28
+-- Dump completed on 2018-03-24 12:59:07

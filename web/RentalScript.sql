@@ -18,6 +18,8 @@
 --
 -- Table structure for table `PostalCode`
 --
+CREATE DATABASE RentalDatabase;
+USE RentalDatabase;
 
 DROP TABLE IF EXISTS `PostalCode`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

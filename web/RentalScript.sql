@@ -19,14 +19,14 @@ CREATE TABLE PostalCode (
 );
 
 CREATE TABLE RealtyOffice (
-	branch_id CHAR(10),
-        branch_name CHAR(50),
-	address CHAR(50),
-	postal_code CHAR(7),
-	PRIMARY KEY (branch_id),
-	FOREIGN KEY (postal_code) REFERENCES PostalCode (postal_code)
-		ON UPDATE CASCADE
-		ON DELETE SET NULL
+    branch_id CHAR(10),
+    branch_name CHAR(50),
+    address CHAR(50),
+    postal_code CHAR(7),
+    PRIMARY KEY (branch_id),
+    FOREIGN KEY (postal_code)
+        REFERENCES PostalCode (postal_code)
+        ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE Realtor (
@@ -188,10 +188,3 @@ INSERT INTO ForSale VALUES ('3', '301000');
 
 INSERT INTO ForRent VALUES ('4', '3680000');
 INSERT INTO ForRent VALUES ('5', '90000000');
-
-
-
--- SELECT * FROM Property;
--- SELECT * FROM Realtor;
--- SELECT * FROM RealtyOffice;
--- SELECT * FROM PostalCode;

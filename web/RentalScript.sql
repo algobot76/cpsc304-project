@@ -115,6 +115,7 @@ CREATE TABLE `ForRent` (
 
 LOCK TABLES `ForRent` WRITE;
 /*!40000 ALTER TABLE `ForRent` DISABLE KEYS */;
+INSERT INTO `ForRent` VALUES (1,3000),(2,4000),(3,5000);
 /*!40000 ALTER TABLE `ForRent` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -179,11 +180,12 @@ CREATE TABLE `Property` (
   `realtor_id` char(10) NOT NULL,
   `postal_code` char(7) DEFAULT NULL,
   `type` char(50) DEFAULT NULL,
-  `date_built` datetime DEFAULT NULL,
+  `date_built` date DEFAULT NULL,
   `sq_ft` float DEFAULT NULL,
-  `date_added` datetime DEFAULT NULL,
+  `date_added` date DEFAULT NULL,
   `num_beds` int(11) DEFAULT NULL,
   `num_baths` float DEFAULT NULL,
+  `address` char(50) NOT NULL,
   PRIMARY KEY (`property_id`),
   KEY `property1_idx` (`realtor_id`),
   KEY `property2_idx` (`postal_code`),
@@ -198,6 +200,7 @@ CREATE TABLE `Property` (
 
 LOCK TABLES `Property` WRITE;
 /*!40000 ALTER TABLE `Property` DISABLE KEYS */;
+INSERT INTO `Property` VALUES ('1','1','V6Z 2T7','Apt/Condo','1996-04-21',1100,'2016-05-01',2,2,'1A-139 Drake Street'),('2','1','V6L 3B4','Apt/Condo','1974-09-12',1316,'2013-12-13',2,2,'409-2101 Mcmullen Avenue'),('3','2','V5L 1K3','Townhouse','2018-05-29',1468,'2014-08-29',3,3,'2036 Franklin Street'),('4','3','V6N 1N3','House','2016-12-10',4132,'2018-01-03',6,6,'4928 Blenheim Street'),('5','4','V5L 1K3','Townhouse','1998-07-31',1445,'2015-07-29',3,3,'2034 Franklin Street');
 /*!40000 ALTER TABLE `Property` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,8 +270,8 @@ DROP TABLE IF EXISTS `Rented`;
 CREATE TABLE `Rented` (
   `property_id` char(10) NOT NULL,
   `final_rent` int(11) DEFAULT NULL,
-  `from_date` datetime DEFAULT NULL,
-  `to_date` datetime DEFAULT NULL,
+  `from_date` date DEFAULT NULL,
+  `to_date` date DEFAULT NULL,
   `customer_id` char(10) NOT NULL,
   PRIMARY KEY (`property_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -344,4 +347,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-25 11:03:41
+-- Dump completed on 2018-03-25 12:12:45

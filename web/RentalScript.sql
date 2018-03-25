@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `RentalDatabase` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `RentalDatabase`;
--- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
 --
 -- Host: 127.0.0.1    Database: RentalDatabase
 -- ------------------------------------------------------
@@ -164,7 +164,7 @@ CREATE TABLE `PostalCode` (
 
 LOCK TABLES `PostalCode` WRITE;
 /*!40000 ALTER TABLE `PostalCode` DISABLE KEYS */;
-INSERT INTO `PostalCode` VALUES ('k1p 5m7','ottawa','on'),('t2e 6j8','calgary','ab');
+INSERT INTO `PostalCode` VALUES ('V5L 3X8','Vancouver','BC'),('V6E 1A3','Vancouver','BC'),('V6K 1N9','Vancouver','BC'),('V6S 1A5','Vancouver','BC'),('V6T 1W6','Vancouver','BC');
 /*!40000 ALTER TABLE `PostalCode` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -247,7 +247,7 @@ CREATE TABLE `RealtyOffice` (
   `postal_code` char(50) DEFAULT NULL,
   PRIMARY KEY (`branch_id`),
   KEY `postalcode_idx` (`postal_code`),
-  CONSTRAINT `postalcode` FOREIGN KEY (`postal_code`) REFERENCES `PostalCode` (`postal_code`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `office` FOREIGN KEY (`postal_code`) REFERENCES `PostalCode` (`postal_code`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -257,6 +257,7 @@ CREATE TABLE `RealtyOffice` (
 
 LOCK TABLES `RealtyOffice` WRITE;
 /*!40000 ALTER TABLE `RealtyOffice` DISABLE KEYS */;
+INSERT INTO `RealtyOffice` VALUES ('1','UBC','2166 Western Pkwy, Vancouver, BC','V6T 1W6'),('2','Kits','2201 W 4th Ave, Vancouver,BC','V6K 1N9'),('3','Dunbar','3320 Crown St, Vancouver, BC','V6S 1A5'),('4','Downtown','1032 Alberni Street, Vancouver, BC','V6E 1A3'),('5','UBC',NULL,'V6T 1W6');
 /*!40000 ALTER TABLE `RealtyOffice` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -346,5 +347,3 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-03-25 12:12:45

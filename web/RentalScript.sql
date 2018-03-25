@@ -40,6 +40,7 @@ CREATE TABLE `Customer` (
 
 LOCK TABLES `Customer` WRITE;
 /*!40000 ALTER TABLE `Customer` DISABLE KEYS */;
+INSERT INTO `Customer` VALUES ('5195850524','Marcy@armyspy.com','Marcy R. Plascencia','1'),('9056029275','Wilson@teleworm.us','Stephanie D. Wilson','2'),('7809200082','Watts@teleworm.us','Molly B. Watts','3'),('2503564541','YongHsiung@dayrep.com','Yong Hsiung','4');
 /*!40000 ALTER TABLE `Customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -91,6 +92,7 @@ CREATE TABLE `Feature` (
 
 LOCK TABLES `Feature` WRITE;
 /*!40000 ALTER TABLE `Feature` DISABLE KEYS */;
+INSERT INTO `Feature` VALUES ('fully furnished','The whole house/apt\rfurnished','4'),('parking','street parking','2'),('partially furnished','kitchen has been furnished','1');
 /*!40000 ALTER TABLE `Feature` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,6 +142,7 @@ CREATE TABLE `ForSale` (
 
 LOCK TABLES `ForSale` WRITE;
 /*!40000 ALTER TABLE `ForSale` DISABLE KEYS */;
+INSERT INTO `ForSale` VALUES ('1',2000000),('4',3400000);
 /*!40000 ALTER TABLE `ForSale` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,6 +233,7 @@ CREATE TABLE `Realtor` (
 
 LOCK TABLES `Realtor` WRITE;
 /*!40000 ALTER TABLE `Realtor` DISABLE KEYS */;
+INSERT INTO `Realtor` VALUES ('6135550192','MarkRWilson@teleworm.us','Mark R. Wilson','12345','1'),('603161977','ElliotEForbes@jourrapide.com','Elliot E. Forbes','12346','2'),('9058885623','ScottCSigler@armyspy.com','Scott C. Sigler','12347','3');
 /*!40000 ALTER TABLE `Realtor` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,3 +351,5 @@ UNLOCK TABLES;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-03-25 12:41:27

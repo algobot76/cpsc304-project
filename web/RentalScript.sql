@@ -1,6 +1,6 @@
 CREATE DATABASE  IF NOT EXISTS `RentalDatabase` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `RentalDatabase`;
--- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
+-- MySQL dump 10.13  Distrib 5.7.17, for macos10.12 (x86_64)
 --
 -- Host: 127.0.0.1    Database: RentalDatabase
 -- ------------------------------------------------------
@@ -176,11 +176,19 @@ DROP TABLE IF EXISTS `Property`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Property` (
   `property_id` char(10) NOT NULL,
-  `address` char(50) NOT NULL,
-  `postal_code` char(7) DEFAULT NULL,
   `realtor_id` char(10) NOT NULL,
+  `postal_code` char(7) DEFAULT NULL,
+  `type` char(50) DEFAULT NULL,
+  `date_built` datetime DEFAULT NULL,
+  `sq_ft` float DEFAULT NULL,
+  `date_added` datetime DEFAULT NULL,
+  `num_beds` int(11) DEFAULT NULL,
+  `num_baths` float DEFAULT NULL,
   PRIMARY KEY (`property_id`),
-  KEY `property1_idx` (`realtor_id`)
+  KEY `property1_idx` (`realtor_id`),
+  KEY `property2_idx` (`postal_code`),
+  CONSTRAINT `property1` FOREIGN KEY (`realtor_id`) REFERENCES `Realtor` (`realtor_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `property2` FOREIGN KEY (`postal_code`) REFERENCES `PostalCode` (`postal_code`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -190,7 +198,6 @@ CREATE TABLE `Property` (
 
 LOCK TABLES `Property` WRITE;
 /*!40000 ALTER TABLE `Property` DISABLE KEYS */;
-INSERT INTO `Property` VALUES ('100','a','b','');
 /*!40000 ALTER TABLE `Property` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -337,4 +344,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-24 19:00:08
+-- Dump completed on 2018-03-25 11:03:41

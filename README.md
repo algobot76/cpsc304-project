@@ -19,10 +19,10 @@ This project will be implemented using the CS department’s oracle database, JD
 
 ## Roadmap
 
+### Frontend
+
 - [ ] Task Foo
 - [ ] Task Bar
-
-### Frontend
 
 ### Backend
 

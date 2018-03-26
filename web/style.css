@@ -51,13 +51,25 @@ a:link:hover {
    text-decoration: underline;
 }
 
-div {
-    background: lightblue;
-    bordercolor:black;
-}
-
 ul {
   list-style-type: none;
 }
 
-li { margin: 0 0 .2em 0; }
+li { 
+    margin: 0 0 .2em 0; 
+    background: lightblue;
+    bordercolor:black;
+}
+
+.propertyDescription {
+    display: inline-block;
+    width: 67%;
+    padding-right: 10px;
+}
+
+.propertyPriceDetails {
+    padding-left: 10px;
+    width: 33%;
+    display: inline-block;
+    float: right;
+}

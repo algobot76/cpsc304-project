@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS RentalDatabase;
+CREATE DATABASE IF NOT EXISTS RentalDatabase;
+USE RentalDatabase;
+
 DROP TABLE IF EXISTS PostalCode;
 DROP TABLE IF EXISTS RealtyOffice;
 DROP TABLE IF EXISTS Realtor;

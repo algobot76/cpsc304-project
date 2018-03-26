@@ -3,19 +3,33 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
   
 <script type="text/javascript">
 $( function() {
-    $( "#dialog" ).dialog({
-      autoOpen: false,
-      show: {
-        effect: "scale"
-      }
-    });
  
     $( ".list_item" ).on( "click", function() {
-      $( "#dialog" ).dialog( "open" );
+      var url = [location.protocol, '//', location.host, "/cpsc304-project/detailedView.jsp?"].join('');
+      var $listItem = $(this);
+      var uriParams = {
+          "property_id": $listItem.attr("property_id"),
+          "type_id": $listItem.attr("type_id")
+      }
+      
+      var uri = Object.keys(uriParams).map(key => {
+        return [key, uriParams[key]].map(encodeURIComponent).join("=");
+      }).join("&");
+      
+      $.ajax(url + uri, {
+         success: result => {
+             var modal = $(".detailedView");
+             modal.html(result);
+         } 
+      });
+      
     });
   } );
 </script>
@@ -61,13 +75,13 @@ $( function() {
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> </title>
-        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
         <ul>
             <c:forEach var="row" items="${propertyQuery.rows}">
                 <li>
-                    <div class="list_item" property_id="${row.property_id}">
+                    <div class="list_item" property_id="${row.property_id}" type_id="${param.type_id}" data-toggle="modal" data-target="#detailedViewModal">
                         <div>
                             ${row.property_type}
                         </div>
@@ -85,11 +99,6 @@ $( function() {
             </c:forEach>
         </ul>
         
-  
-        <div id="dialog" title="Basic dialog">
-          <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
-        </div>
-               
-       
+        <div class="modal detailedView" id="detailedViewModal" role="dialog"></div>
     </body>
 </html>

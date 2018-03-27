@@ -1,8 +1,8 @@
 # Queries
 
 - [Queries](#queries)
-  - [Queries for Realtors](#queries-for-realtors)
-    - [Update tables](#update-tables)
+  - [Queries for Updating Tables](#queries-for-updating-tables)
+    - [Add entries](#add-entries)
       - [Add a new entry into `Property` table](#add-a-new-entry-into-property-table)
         - [SQL](#sql)
         - [Result](#result)
@@ -14,9 +14,9 @@
         - [SQL](#sql)
         - [Result](#result)
 
-## Queries for Realtors
+## Queries for Updating Tables
 
-### Update tables
+### Add entries
 
 #### Add a new entry into `Property` table
 

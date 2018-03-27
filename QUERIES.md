@@ -72,3 +72,30 @@ After
 | 2 | 4000 |
 | 3 | 5000 |
 | 6 | 1250 |
+
+## Add a new entry into `Customer` table
+
+### SQL Statements
+
+```sql
+INSERT INTO Customer
+VALUES ('90560292222', 'Mercy@armyspy.com', 'Mary.Happy', '2');
+```
+Before
+
+|phone       | email                 |name                 | customer_id|
+|------------|-----------------------|---------------------|---|
+| 5195850524 | Marcy@armyspy.com     | Marcy R. Plascencia | 1 |
+| 9056029275 | Wilson@teleworm.us    | Stephanie D. Wilson | 2 |
+| 7809200082 | Watts@teleworm.us     | Molly B. Watts      | 3 |
+| 2503564541 | YongHsiung@dayrep.com | Yong Hsiung         | 4 |
+
+After
+
+|phone        | email                 |name                 |customer_id  |
+|-------------|-----------------------|---------------------|---|
+| 5195850524  | Marcy@armyspy.com     | Marcy R. Plascencia | 1 |
+| 9056029275  | Wilson@teleworm.us    | Stephanie D. Wilson | 2 |
+| 7809200082  | Watts@teleworm.us     | Molly B. Watts      | 3 |
+| 2503564541  | YongHsiung@dayrep.com | Yong Hsiung         | 4 |
+| 90560292222 | Mercy@armyspy.com     | Mary.Happy          | 5 |

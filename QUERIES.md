@@ -1,10 +1,26 @@
-# Queries for Realtors
+# Queries
 
-## Update tables
+- [Queries](#queries)
+  - [Queries for Realtors](#queries-for-realtors)
+    - [Update tables](#update-tables)
+      - [Add a new entry into `Property` table](#add-a-new-entry-into-property-table)
+        - [SQL](#sql)
+        - [Result](#result)
+      - [Add a new entry into `ForRent` table](#add-a-new-entry-into-forrent-table)
+        - [SQL](#sql)
+        - [Result](#result)
+    - [Delete entries](#delete-entries)
+      - [Delete an entry from `Property` table](#delete-an-entry-from-property-table)
+        - [SQL](#sql)
+        - [Result](#result)
 
-### Add a new entry into `Property` table
+## Queries for Realtors
 
-#### SQL Statements
+### Update tables
+
+#### Add a new entry into `Property` table
+
+##### SQL
 
 ```sql
 INSERT INTO PostalCode
@@ -15,7 +31,7 @@ INSERT INTO Property
 VALUES ('6', '12345', 'M2R 2Z1', 'Apt/Condo', '1990-07-29', 999, '2014-03-01', 1, 1, '305-135 Antibes Drive');
 ```
 
-#### Result
+##### Result
 
 Before
 
@@ -38,16 +54,16 @@ After
 | 5 | 2034 Franklin Street     | V5L 1K3 | Townhouse | 1998-07-31 | 1445 | 2015-07-29 | 3 | 3 | 12347 |
 | 6 | 305-135 Antibes Drive    | M2R 2Z1 | Apt/Condo | 1990-07-29 | 999  | 2014-03-01 | 1 | 1 | 12345 |
 
-### Add a new entry into `ForRent` table
+#### Add a new entry into `ForRent` table
 
-#### SQL Statements
+##### SQL
 
 ```sql
 INSERT INTO ForRent
 VALUES ('6', 1250);
 ```
 
-#### Result
+##### Result
 
 Before
 
@@ -66,46 +82,18 @@ After
 | 3 | 5000 |
 | 6 | 1250 |
 
-### Add a new entry into `Customer` table
+### Delete entries
 
-#### SQL Statements
+#### Delete an entry from `Property` table
 
-```sql
-INSERT INTO Customer
-VALUES ('90560292222', 'Mercy@armyspy.com', 'Mary Happy', '2');
-```
-
-#### Result
-
-Before
-
-|phone|email|name|customer_id|
-|------------|-----------------------|---------------------|---|
-| 5195850524 | Marcy@armyspy.com     | Marcy R. Plascencia | 1 |
-| 9056029275 | Wilson@teleworm.us    | Stephanie D. Wilson | 2 |
-| 7809200082 | Watts@teleworm.us     | Molly B. Watts      | 3 |
-| 2503564541 | YongHsiung@dayrep.com | Yong Hsiung         | 4 |
-
-After
-
-|phone|email|name|customer_id|
-|-------------|-----------------------|---------------------|---|
-| 5195850524  | Marcy@armyspy.com     | Marcy R. Plascencia | 1 |
-| 9056029275  | Wilson@teleworm.us    | Stephanie D. Wilson | 2 |
-| 7809200082  | Watts@teleworm.us     | Molly B. Watts      | 3 |
-| 2503564541  | YongHsiung@dayrep.com | Yong Hsiung         | 4 |
-| 90560292222 | Mercy@armyspy.com     | Mary.Happy          | 5 |
-
-### Delete an entry from `Property` table
-
-#### SQL
+##### SQL
 
 ```sql
 DELETE FROM Property
 WHERE property_id = '3';
 ```
 
-#### Result
+##### Result
 
 Before
 

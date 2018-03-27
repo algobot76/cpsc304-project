@@ -130,7 +130,7 @@ INSERT INTO ForRent VALUES (1, 3000), (2, 4000), (3, 5000);
 CREATE TABLE Sold (
   property_id CHAR(10),
   final_price INT,
-  date_sold   DATETIME,
+  date_sold   DATE,
   customer_id CHAR(10),
   PRIMARY KEY (property_id),
   FOREIGN KEY (property_id) REFERENCES Property (property_id)
@@ -144,8 +144,8 @@ CREATE TABLE Sold (
 CREATE TABLE Rented (
   property_id CHAR(10),
   final_rent  INT,
-  from_date   DATETIME,
-  to_date     DATETIME,
+  from_date   DATE,
+  to_date     DATE,
   customer_id CHAR(10) NOT NULL,
   PRIMARY KEY (property_id),
   FOREIGN KEY (property_id) REFERENCES Property (property_id)
@@ -209,7 +209,7 @@ VALUES ('Kitchen', '1',
 CREATE TABLE CustomerContactRealtor (
   customer_id     CHAR(10),
   realtor_id      CHAR(10),
-  date            DATETIME,
+  date            DATE,
   contact_message CHAR(200),
   PRIMARY KEY (customer_id, realtor_id),
   FOREIGN KEY (customer_id) REFERENCES Customer (customer_id)

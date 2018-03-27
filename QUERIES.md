@@ -1,4 +1,6 @@
-# Update queries
+# Queries for Realtors
+
+## Update tables
 
 - [Update queries](#update-queries)
   - [Add a new entry into `Property` table](#add-a-new-entry-into-property-table)
@@ -7,11 +9,12 @@
   - [Add a new entry into `ForRent` table](#add-a-new-entry-into-forrent-table)
     - [SQL Statements](#sql-statements)
     - [Result](#result)
+  - [Add a new entry into `Customer` table](#add-a-new-entry-into-customer-table)
+    - [SQL Statements](#sql-statements)
 
-## Add a new entry into `Property` table
+### Add a new entry into `Property` table
 
-### SQL Statements
-
+#### SQL Statements
 
 ```sql
 INSERT INTO PostalCode
@@ -22,11 +25,11 @@ INSERT INTO Property
 VALUES ('6', '12345', 'M2R 2Z1', 'Apt/Condo', '1990-07-29', 999, '2014-03-01', 1, 1, '305-135 Antibes Drive');
 ```
 
-### Result
+#### Result
 
 Before
 
-property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_beds|num_baths|realtor_id
+|property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_beds|num_baths|realtor_id|
 |---|--------------------------|---------|-----------|------------|------|------------|---|---|-------|
 | 1 | 1A-139 Drake Street      | V6Z 2T7 | Apt/Condo | 1996-04-21 | 1100 | 2016-05-01 | 2 | 2 | 12345 |
 | 2 | 409-2101 Mcmullen Avenue | V6L 3B4 | Apt/Condo | 1974-09-12 | 1316 | 2013-12-13 | 2 | 2 | 12345 |
@@ -36,7 +39,7 @@ property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_be
 
 After
 
-property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_beds|num_baths|realtor_id
+|property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_beds|num_baths|realtor_id|
 |---|--------------------------|---------|-----------|------------|------|------------|---|---|-------|
 | 1 | 1A-139 Drake Street      | V6Z 2T7 | Apt/Condo | 1996-04-21 | 1100 | 2016-05-01 | 2 | 2 | 12345 |
 | 2 | 409-2101 Mcmullen Avenue | V6L 3B4 | Apt/Condo | 1974-09-12 | 1316 | 2013-12-13 | 2 | 2 | 12345 |
@@ -45,16 +48,16 @@ property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_be
 | 5 | 2034 Franklin Street     | V5L 1K3 | Townhouse | 1998-07-31 | 1445 | 2015-07-29 | 3 | 3 | 12347 |
 | 6 | 305-135 Antibes Drive    | M2R 2Z1 | Apt/Condo | 1990-07-29 | 999  | 2014-03-01 | 1 | 1 | 12345 |
 
-## Add a new entry into `ForRent` table
+### Add a new entry into `ForRent` table
 
-### SQL Statements
+#### SQL Statements
 
 ```sql
 INSERT INTO ForRent
 VALUES ('6', 1250);
 ```
 
-### Result
+#### Result
 
 Before
 
@@ -73,17 +76,20 @@ After
 | 3 | 5000 |
 | 6 | 1250 |
 
-## Add a new entry into `Customer` table
+### Add a new entry into `Customer` table
 
-### SQL Statements
+#### SQL Statements
 
 ```sql
 INSERT INTO Customer
-VALUES ('90560292222', 'Mercy@armyspy.com', 'Mary.Happy', '2');
+VALUES ('90560292222', 'Mercy@armyspy.com', 'Mary Happy', '2');
 ```
+
+#### Result
+
 Before
 
-|phone       | email                 |name                 | customer_id|
+|phone|email|name|customer_id|
 |------------|-----------------------|---------------------|---|
 | 5195850524 | Marcy@armyspy.com     | Marcy R. Plascencia | 1 |
 | 9056029275 | Wilson@teleworm.us    | Stephanie D. Wilson | 2 |
@@ -92,7 +98,7 @@ Before
 
 After
 
-|phone        | email                 |name                 |customer_id  |
+|phone|email|name|customer_id|
 |-------------|-----------------------|---------------------|---|
 | 5195850524  | Marcy@armyspy.com     | Marcy R. Plascencia | 1 |
 | 9056029275  | Wilson@teleworm.us    | Stephanie D. Wilson | 2 |

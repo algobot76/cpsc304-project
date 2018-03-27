@@ -113,3 +113,20 @@ After
 | 2 | 409-2101 Mcmullen Avenue | V6L 3B4 | Apt/Condo | 1974-09-12 | 1316 | 2013-12-13 | 2 | 2 | 12345 |
 | 4 | 4928 Blenheim Street     | V6N 1N3 | House     | 2016-12-10 | 4132 | 2018-01-03 | 6 | 6 | 12347 |
 | 5 | 2034 Franklin Street     | V5L 1K3 | Townhouse | 1998-07-31 | 1445 | 2015-07-29 | 3 | 3 | 12347 |
+
+Any SQL statement that deletes an entry from the `Property` table will also delete the corresponding entry from  the `ForSale`, `ForRent`, `Sold`, or `Rented` table.
+
+`ForRent` table before:
+
+|property_id|rent|
+|---|------|
+| 1 | 3000 |
+| 2 | 4000 |
+| 3 | 5000 |
+
+`ForRent` table after:
+
+|property_id|rent|
+|---|------|
+| 1 | 3000 |
+| 2 | 4000 |

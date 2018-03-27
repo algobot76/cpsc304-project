@@ -95,7 +95,7 @@ CREATE TABLE Property (
     ON DELETE CASCADE,
   FOREIGN KEY (postal_code) REFERENCES PostalCode (postal_code)
     ON UPDATE CASCADE
-    ON DELETE SET NULL
+    ON DELETE NO ACTION
 );
 
 INSERT INTO Property (property_id, realtor_id, postal_code, property_type, date_built, sq_ft, date_added, num_beds, num_baths, address)

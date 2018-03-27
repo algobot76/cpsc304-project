@@ -14,20 +14,28 @@
     String tableToJoin = typeId.equals("rental") ? "ForRent" : "ForSale";
     String typeString = typeId.equals("rental") ? "For Rent" : "For Sale";
     
-    String sqlString = "select Property.*, Postalcode.*, {{tableName}}.price "
+    String propertyDetailsSql = "select Property.*, Postalcode.*, {{tableName}}.price "
                         + "from Property, PostalCode, {{tableName}} "
                         + "WHERE Property.postal_code = PostalCode.postal_code "
                         + "AND {{tableName}}.property_id = Property.property_id "
                         + "AND " + propertyId + " = Property.property_id";
     
-    sqlString = sqlString.replace("{{tableName}}", tableToJoin);
-    System.out.println(sqlString);
+    propertyDetailsSql = propertyDetailsSql.replace("{{tableName}}", tableToJoin);
+    System.out.println("propertyDetailsSql string: " + propertyDetailsSql);
     
-    pageContext.setAttribute("sqlString", sqlString);
+    String roomsSql = "select Room.* from Room INNER JOIN Property ON Property.property_id = Room.property_id "
+                       + "WHERE " + propertyId + " = Property.property_id";
+    
+    pageContext.setAttribute("propertyDetailsSql", propertyDetailsSql);
+    pageContext.setAttribute("roomsSql", roomsSql);
     pageContext.setAttribute("typeString", typeString);
 %>
 <sql:query var="propertyQuery" dataSource="jdbc/RentalSite">
-    <c:out value="${sqlString}"/>
+    <c:out value="${propertyDetailsSql}"/>
+</sql:query>
+
+<sql:query var="rooms" dataSource="jdbc/RentalSite">
+    <c:out value="${roomsSql}"/>
 </sql:query>
 
 <c:set var="propertyDetails" value="${propertyQuery.rows[0]}"/>
@@ -37,7 +45,55 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body">
-                    <div style="height: 500px;"> PICTURES GO HERE LEL, remember to remove</div>
+                    <div class="upside-down-nav">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab" address="${propertyDetails.address}, ${propertyDetails.city}, ${propertyDetails.province}">
+                                <div id="map-canvas" style="width:100%; height:500px;"></div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
+                                <div id="carouselGalleryIndicators" class="carousel slide gallery" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <c:forEach var="row2" items="${rooms.rows}" varStatus="myIndex">
+                                            <c:choose>
+                                                <c:when test="${myIndex.index=='0'}"> 
+                                                    <div class="carousel-item active">
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="carousel-item">
+                                                </c:otherwise>
+                                            </c:choose>
+                                                <img src="${row2.image_url}" style="width: 100%;" alt="...">
+                                                <div class="carousel-caption d-none d-md-block">
+                                                    <h5>${row2.room_name}</h5>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselGalleryIndicators" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselGalleryIndicators" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>    
+                        </div>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-map-tab" data-toggle="tab" href="#nav-map" role="tab" aria-controls="nav-home" aria-selected="true">
+                                    <span class="map-icon"></span>
+                                    <span>Map</span>
+                                </a>
+                                <a class="nav-item nav-link" id="nav-gallery-tab" data-toggle="tab" href="#nav-gallery" role="tab" aria-controls="nav-profile" aria-selected="false">
+                                    <span class="gallery-icon"></span>
+                                    <span>Gallery</span>
+                                </a>
+                            </div>
+                        </nav>
+                        
+                    </div>
                     <div class="propertyDescription">
                         <h1>
                             ${propertyDetails.address}
@@ -60,6 +116,7 @@
                     <div class="propertyPriceDetails">
                         <h1>${typeString}</h1>
                         <h2>$${propertyDetails.price}</h2>
+                        
                     </div>
                 </div>
             </div>

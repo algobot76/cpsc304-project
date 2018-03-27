@@ -6,10 +6,54 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBuqQSkoLK_yz9xEqNR5y2W6zsIdhlrygg"></script>
 
   
 <script type="text/javascript">
 $( function() {
+    var geocoder;
+    var map;
+    function initialize(domElement, address) {
+      geocoder = new google.maps.Geocoder();
+      var latlng = new google.maps.LatLng(-34.397, 150.644);
+      var myOptions = {
+        zoom: 15,
+        center: latlng,
+      mapTypeControl: true,
+      mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+      navigationControl: true,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+      if (geocoder) {
+        geocoder.geocode( { 'address': address}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+            map.setCenter(results[0].geometry.location);
+
+              var infowindow = new google.maps.InfoWindow(
+                  { content: '<b>'+address+'</b>',
+                    size: new google.maps.Size(150,50)
+                  });
+
+              var marker = new google.maps.Marker({
+                  position: results[0].geometry.location,
+                  map: map, 
+                  title:address
+              }); 
+              google.maps.event.addListener(marker, 'click', function() {
+                  infowindow.open(map,marker);
+              });
+
+            } else {
+              alert("No results found");
+            }
+          } else {
+            alert("Geocode was not successful for the following reason: " + status);
+          }
+        });
+      }
+    }
  
     $( ".list_item" ).on( "click", function() {
       var url = [location.protocol, '//', location.host, "/cpsc304-project/detailedView.jsp?"].join('');
@@ -27,9 +71,12 @@ $( function() {
          success: result => {
              var modal = $(".detailedView");
              modal.html(result);
+             var $result = $(result);
+             var $navMap = $result.find("#nav-map");
+             var address = $navMap.attr("address");
+             initialize($navMap.find("#map-canvas")[0], address);
          } 
       });
-      
     });
   } );
 </script>
@@ -76,26 +123,29 @@ $( function() {
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
-        <ul>
-            <c:forEach var="row" items="${propertyQuery.rows}">
-                <li>
-                    <div class="list_item" property_id="${row.property_id}" type_id="${param.type_id}" data-toggle="modal" data-target="#detailedViewModal">
-                        <div>
-                            ${row.property_type}
+        <div style="width:100%; height:100%;">
+            <ul>
+                <c:forEach var="row" items="${propertyQuery.rows}">
+                    <li>
+                        <div class="list_item" property_id="${row.property_id}" type_id="${param.type_id}" data-toggle="modal" data-target="#detailedViewModal">
+                            <div>
+                                ${row.property_type}
+                            </div>
+                            <div>
+                                ${row.address}
+                            </div>
+                            <div>
+                                ${row.price}
+                            </div>
+                            <div>
+                                ${row.city}
+                            </div>
                         </div>
-                        <div>
-                            ${row.address}
-                        </div>
-                        <div>
-                            ${row.price}
-                        </div>
-                        <div>
-                            ${row.city}
-                        </div>
-                    </div>
-                </li>
-            </c:forEach>
-        </ul>
+                    </li>
+                </c:forEach>
+            </ul>
+
+        </div>
         
         <div class="modal detailedView" id="detailedViewModal" role="dialog"></div>
     </body>

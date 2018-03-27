@@ -43,7 +43,6 @@ $( function() {
     String typeId = request.getParameter("type_id");
     String address = request.getParameter("addr_input");
     String tableToJoin = typeId.equals("rental") ? "ForRent" : "ForSale";
-    String priceType = tableToJoin.equals("ForRent") ? "rent" : "price";
     
     Integer priceFrom = Integer.parseInt(request.getParameter("price_from"));
     Integer priceTo = Integer.parseInt(request.getParameter("price_to"));
@@ -51,14 +50,13 @@ $( function() {
     Integer sqftFrom = Integer.parseInt(request.getParameter("sqft_from"));
     Integer sqftTo = Integer.parseInt(request.getParameter("sqft_to"));
     
-    String sqlString = "select Property.*, Postalcode.city, {{tableName}}.{{priceType}} "
+    String sqlString = "select Property.*, Postalcode.city, {{tableName}}.price "
                         + "from Property, PostalCode, {{tableName}} "
                         + "WHERE Property.postal_code = PostalCode.postal_code "
                         + "AND {{tableName}}.property_id = Property.property_id "
-                        + "AND ( {{tableName}}.{{priceType}} BETWEEN " + priceFrom + " AND " + priceTo + ") "
+                        + "AND ( {{tableName}}.price BETWEEN " + priceFrom + " AND " + priceTo + ") "
                         + "AND ( Property.sq_ft BETWEEN " + sqftFrom + " AND " + sqftTo + ") ";
     
-    sqlString = sqlString.replace("{{priceType}}", priceType);
     sqlString = sqlString.replace("{{tableName}}", tableToJoin);
     System.out.println("here is the input " + priceFrom.getClass().getName() + ", " + priceTo.getClass().getName() + ", " + sqftTo.getClass().getName() + ", " + sqftFrom.getClass().getName());
     System.out.println(sqlString);

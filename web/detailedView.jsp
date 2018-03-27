@@ -12,17 +12,14 @@
     String propertyId = request.getParameter("property_id");
     String typeId = request.getParameter("type_id");
     String tableToJoin = typeId.equals("rental") ? "ForRent" : "ForSale";
-    String priceType = tableToJoin.equals("ForRent") ? "rent" : "price";
     String typeString = typeId.equals("rental") ? "For Rent" : "For Sale";
     
-    String sqlString = "select Property.*, Postalcode.*, {{tableName}}.{{priceType}} "
+    String sqlString = "select Property.*, Postalcode.*, {{tableName}}.price "
                         + "from Property, PostalCode, {{tableName}} "
                         + "WHERE Property.postal_code = PostalCode.postal_code "
                         + "AND {{tableName}}.property_id = Property.property_id "
                         + "AND " + propertyId + " = Property.property_id";
     
-    
-    sqlString = sqlString.replace("{{priceType}}", priceType);
     sqlString = sqlString.replace("{{tableName}}", tableToJoin);
     System.out.println(sqlString);
     

@@ -119,7 +119,7 @@ INSERT INTO ForSale VALUES ('1', 2000000), ('4', 3400000);
 
 CREATE TABLE ForRent (
   property_id CHAR(10),
-  rent        INT,
+  price       INT,
   PRIMARY KEY (property_id),
   FOREIGN KEY (property_id) REFERENCES Property (property_id)
     ON UPDATE CASCADE

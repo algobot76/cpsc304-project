@@ -30,6 +30,7 @@
     pageContext.setAttribute("propertyDetailsSql", propertyDetailsSql);
     pageContext.setAttribute("roomsSql", roomsSql);
     pageContext.setAttribute("typeString", typeString);
+    pageContext.setAttribute("propertyTypeTable", tableToJoin);
 %>
 
 <sql:query var="propertyQuery" dataSource="jdbc/RentalSite">
@@ -55,6 +56,14 @@
                         <form id="search_form" action="realtorEdit.jsp">
                             
                             <strong>Edit Property Values</strong>
+                            
+                            <br></br>
+                            
+                            <strong>Delete this property?</strong>
+                            <select name="delete_input">
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
                             
                             <br></br>
                             
@@ -102,41 +111,59 @@
             </div>
         </div>
         </div>
-    
+                            
     <%
+        boolean toDelete = false;
+        if(request.getParameter("delete_input") != null){
+            toDelete = request.getParameter("delete_input").equals("yes") ? true : false;
+        }
+        
         String priceVal = request.getParameter("price_input");
         String sqFtVal = request.getParameter("sqft_input");
         String addressVal = request.getParameter("address_input");
         String bedVal = request.getParameter("bed_input");
         String bathVal = request.getParameter("bath_input");
         
-        if (priceVal == null && sqFtVal == null && addressVal == null && bedVal == null && bathVal == null) {
-        // All are null when the page is first requested, 
-        // so do nothing
-        } else { 
-            if (priceVal.length() == 0 && sqFtVal.length() == 0 && addressVal.length() == 0 && bedVal.length() == 0 && bathVal.length() == 0) {
-                // There was a querystring like ?myText=
-                // but no text, so myText is not null, but 
-                // a zero length string instead.
-        %>
-        <%  } else {
-        %>
-            <sql:update var="sqlUpdate" dataSource="jdbc/RentalSite">
-                UPDATE Property p 
-                SET p.address = '${param.address_input}',
-                p.sq_ft = ${param.sqft_input},
-                p.num_beds = ${param.bed_input},
-                p.num_baths = ${param.bath_input}
-                WHERE p.property_id = ${param.id_input}
+        if (toDelete) { %>
+            <sql:update var="sqlDelete" dataSource="jdbc/RentalSite">
+                DELETE FROM Property
+                WHERE Property.property_id = ${param.id_input}
             </sql:update>
-            
-            <script type="text/javascript">
+    <%  } else {
+            if (priceVal == null && sqFtVal == null && addressVal == null && bedVal == null && bathVal == null) {
+            // All are null when the page is first requested, 
+            // so do nothing
+            } else { 
+                if (priceVal.length() == 0 && sqFtVal.length() == 0 && addressVal.length() == 0 && bedVal.length() == 0 && bathVal.length() == 0) {
+                    // There was a querystring like ?myText=
+                    // but no text, so myText is not null, but 
+                    // a zero length string instead.
+                } else {
+    %>
+                <sql:update var="sqlUpdate" dataSource="jdbc/RentalSite">
+                    UPDATE Property p 
+                    SET p.address = '${param.address_input}',
+                    p.sq_ft = ${param.sqft_input},
+                    p.num_beds = ${param.bed_input},
+                    p.num_baths = ${param.bath_input}
+                    WHERE p.property_id = ${param.id_input}
+                </sql:update>
+
+                <!--Need to have separate updates per table-->    
+                <sql:update var="sqlUpdatePrice" dataSource="jdbc/RentalSite">
+                    UPDATE <c:out value="${propertyTypeTable}"/> type
+                    INNER JOIN Property p on ${param.id_input} = type.property_id
+                    SET type.price = ${param.price_input}
+                </sql:update>
+
+                <script type="text/javascript">
                 location.reload();
-            </script>
-        <%
+                </script>
+    <%
+                }
             }
         }
-        %>
+    %>
     </body>
     
     

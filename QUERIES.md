@@ -99,3 +99,73 @@ After
 | 7809200082  | Watts@teleworm.us     | Molly B. Watts      | 3 |
 | 2503564541  | YongHsiung@dayrep.com | Yong Hsiung         | 4 |
 | 90560292222 | Mercy@armyspy.com     | Mary.Happy          | 5 |
+
+
+## Add a new entry into `Sold` table
+
+### SQL Statements
+
+```sql
+INSERT INTO Sold
+VALUES('1', '23456800','2012-03-07','4');
+```
+
+Before
+
+|property_id |final_price            |date_sold            | customer_id|
+|------------|-----------------------|---------------------|---|
+
+After
+
+| property_id  |    final_price      |         date_sold   |  customer_id |
+|---|----------|------------|---|
+| 1 | 23456800 | 2012-03-07 | 4 |
+
+
+## Add a new entry into `ForSale` table
+
+### SQL Statements
+
+```sql
+INSERT INTO ForSale
+VALUES('3','4500000');
+```
+
+Before
+|property_id   | price    |
+|---|---------|
+| 1 | 2000000 |
+| 4 | 3400000 |
+
+
+After
+|  property_id |  price       |
+|---|---------|
+| 1 | 2000000 |
+| 3 | 4500000 |
+| 4 | 3400000 |
+
+
+## Add a new entry into `ForSale` table
+
+### SQL Statements
+
+```sql
+INSERT INTO Feature
+VALUES('half furnished', 'The whole house/apt\r half furnished', '2');
+```
+
+Before
+| feature_name        | description                | property_id|
+|---------------------|----------------------------|---|
+| fully_furnished     | The_whorehouse/aptfurnished| 4  |
+| parking             | street parking             | 2 |
+| partially_furnished | kitchen_has_been_furnished | 1 |
+
+After
+| feature_name        | description                |property_id  |
+|---------------------|----------------------------|---|
+| fully_furnished     | The_whorehouse/apt         | 4 |
+| half furnished      | The whole house/apt        | 3 |
+| parking             | street parking             | 2 |
+| partially_furnished | kitchen_has_been_furnished | 1 |

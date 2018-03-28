@@ -170,8 +170,8 @@ CREATE TABLE Feature (
 );
 
 INSERT INTO Feature
-VALUES ('fully furnished', 'The whole house/apt\rfurnished', '4'), ('parking', 'street parking', '2'),
-  ('partially furnished', 'kitchen has been furnished', '1');
+VALUES ('fully_furnished', 'The_whorehouse/apt\rfurnished', '4'), ('parking', 'street parking', '2'),
+  ('partially_furnished', 'kitchen_has_been_furnished', '1');
 
 
 CREATE TABLE Room (

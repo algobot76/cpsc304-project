@@ -20,6 +20,7 @@
     - [Find the highest/lowest average price of `ForSale` properties](#find-the-highestlowest-average-price-of-forsale-properties)
       - [Using `MAX()`](#using-max)
       - [Using `MIN()`](#using-min)
+  - [Queries for Reports](#queries-for-reports)
 
 ## Queries for Updating Tables
 
@@ -140,3 +141,5 @@ FROM (SELECT AVG(S.price) AS avg_price
       WHERE S.property_id = P.property_id AND P.postal_code = PC.postal_code
       GROUP BY PC.province) AS AvgPrices;
 ```
+
+## Queries for Reports

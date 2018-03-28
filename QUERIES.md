@@ -112,10 +112,14 @@ WHERE NOT EXISTS(
 ### For each property, find the property of lowest rental price
 
 ```sql
-SELECT property_id MIN(rent)
-FROM property P ForRent R
-WHERE P.property_id = R.property_id
-GROUP BY property_id
+SELECT R1.property_id, min_rent
+FROM ForRent R1, (SELECT
+                    P2.property_type AS type,
+                    MIN(rent)        AS min_rent
+                  FROM property P2, ForRent R2
+                  WHERE P2.property_id = R2.property_id
+                  GROUP BY P2.property_type) AS MinRents
+WHERE MinRents.type = 'Apt/Condo' AND R1.rent = MinRents.min_rent;
 ```
 
 ## Nested Aggregation with Group-by

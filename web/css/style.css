@@ -20,16 +20,51 @@ and open the template in the editor.
   background-size: 16px 16px;
   display: inline-block;
 }
-.propertyDescription {
+.propertyDescriptionHeader {
   display: inline-block;
   width: 67%;
   padding-right: 10px;
+}
+.propertyDescriptionHeader .middle-dot {
+  content: "\00B7";
+  display: inline-block;
+  margin: 0 0 0 5;
+}
+.propertyDescriptionHeader .middle-dot:before {
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 700;
 }
 .propertyPriceDetails {
   padding-left: 10px;
   width: 33%;
   display: inline-block;
   float: right;
+}
+.row-fluid {
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+.listing_item {
+  margin: 25px;
+}
+.listing_item.col-md-5 {
+  width: 100%;
+  float: left;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.listing_item .image-container {
+  height: 40vh;
+  overflow: hidden;
+}
+.listing_item .card-img-top {
+  display: block;
+  width: 200%;
+  margin-left: -50%;
+  margin-top: -25%;
+  margin-bottom: -25%;
 }
 .upside-down-nav .nav-tabs {
   border-bottom: 0;

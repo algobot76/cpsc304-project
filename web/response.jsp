@@ -1,6 +1,7 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -13,7 +14,7 @@
 $( function() {
     var geocoder;
     var map;
-    function initialize(domElement, address) {
+    function initialize(address) {
       geocoder = new google.maps.Geocoder();
       var latlng = new google.maps.LatLng(-34.397, 150.644);
       var myOptions = {
@@ -24,27 +25,30 @@ $( function() {
       navigationControl: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
-      map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+      
       if (geocoder) {
-        geocoder.geocode( { 'address': address}, function(results, status) {
+        geocoder.geocode( { 'address': address }, function(results, status) {
+          var infowindow;
+          var marker;
           if (status == google.maps.GeocoderStatus.OK) {
             if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-            map.setCenter(results[0].geometry.location);
+                myOptions.center = results[0].geometry.location;
 
-              var infowindow = new google.maps.InfoWindow(
-                  { content: '<b>'+address+'</b>',
-                    size: new google.maps.Size(150,50)
-                  });
+                infowindow = new google.maps.InfoWindow(
+                    { content: '<b>'+address+'</b>',
+                        size: new google.maps.Size(150,50)
+                    });
 
-              var marker = new google.maps.Marker({
-                  position: results[0].geometry.location,
-                  map: map, 
-                  title:address
-              }); 
-              google.maps.event.addListener(marker, 'click', function() {
-                  infowindow.open(map,marker);
-              });
+                marker = new google.maps.Marker({
+                    position: results[0].geometry.location,
+                    title:address
+                }); 
 
+                map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+                marker.setMap(map);
+                google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.open(map,marker);
+                });
             } else {
               alert("No results found");
             }
@@ -55,7 +59,7 @@ $( function() {
       }
     }
  
-    $( ".list_item" ).on( "click", function() {
+    $( ".listing_item" ).on( "click", function() {
       var url = [location.protocol, '//', location.host, "/cpsc304-project/detailedView.jsp?"].join('');
       var $listItem = $(this);
       var uriParams = {
@@ -74,7 +78,7 @@ $( function() {
              var $result = $(result);
              var $navMap = $result.find("#nav-map");
              var address = $navMap.attr("address");
-             initialize($navMap.find("#map-canvas")[0], address);
+             initialize(address);
          } 
       });
     });
@@ -97,7 +101,7 @@ $( function() {
     Integer sqftFrom = Integer.parseInt(request.getParameter("sqft_from"));
     Integer sqftTo = Integer.parseInt(request.getParameter("sqft_to"));
     
-    String sqlString = "select Property.*, Postalcode.city, {{tableName}}.price "
+    String sqlString = "select Property.*, Postalcode.*, {{tableName}}.price "
                         + "from Property, PostalCode, {{tableName}} "
                         + "WHERE Property.postal_code = PostalCode.postal_code "
                         + "AND {{tableName}}.property_id = Property.property_id "
@@ -124,27 +128,30 @@ $( function() {
     </head>
     <body>
         <div style="width:100%; height:100%;">
-            <ul>
-                <c:forEach var="row" items="${propertyQuery.rows}">
-                    <li>
-                        <div class="list_item" property_id="${row.property_id}" type_id="${param.type_id}" data-toggle="modal" data-target="#detailedViewModal">
-                            <div>
-                                ${row.property_type}
+            <c:choose>
+                <c:when test="${fn:length(propertyQuery.rows) > 0}"> 
+                    <div class="row">
+                        <c:forEach var="row" items="${propertyQuery.rows}">
+                            <div class="card listing_item col-md-5" property_id="${row.property_id}" type_id="${param.type_id}" data-toggle="modal" data-target="#detailedViewModal">
+                                <div class="image-container">
+                                    <img class="card-img-top" src="${row.image_url}" alt="...">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${row.property_type}</h5>
+                                    <p class="card-text">
+                                        $${row.price} <br>
+                                        ${row.address}, ${row.city}, ${row.province} <br>
+                                        ${row.num_beds} beds &middot ${row.num_baths} baths &middot ${row.sq_ft}sqft
+                                    </p>
+                                </div>
                             </div>
-                            <div>
-                                ${row.address}
-                            </div>
-                            <div>
-                                ${row.price}
-                            </div>
-                            <div>
-                                ${row.city}
-                            </div>
-                        </div>
-                    </li>
-                </c:forEach>
-            </ul>
-
+                        </c:forEach>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div class="no-results"></div>
+                </c:otherwise>
+            </c:choose>
         </div>
         
         <div class="modal detailedView" id="detailedViewModal" role="dialog"></div>

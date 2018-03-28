@@ -89,6 +89,7 @@ CREATE TABLE Property (
   num_beds      INT,
   num_baths     FLOAT,
   realtor_id    CHAR(10) NOT NULL,
+  image_url   TEXT,
   PRIMARY KEY (property_id),
   FOREIGN KEY (realtor_id) REFERENCES Realtor (realtor_id)
     ON UPDATE CASCADE
@@ -98,12 +99,12 @@ CREATE TABLE Property (
     ON DELETE SET NULL
 );
 
-INSERT INTO Property (property_id, realtor_id, postal_code, property_type, date_built, sq_ft, date_added, num_beds, num_baths, address)
-VALUES ('1', '12345', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2, '1A-139 Drake Street'),
-  ('2', '12345', 'V6L 3B4', 'Apt/Condo', '1974-09-12', 1316, '2013-12-13', 2, 2, '409-2101 Mcmullen Avenue'),
-  ('3', '12346', 'V5L 1K3', 'Townhouse', '2018-05-29', 1468, '2014-08-29', 3, 3, '2036 Franklin Street'),
-  ('4', '12347', 'V6N 1N3', 'House', '2016-12-10', 4132, '2018-01-03', 6, 6, '4928 Blenheim Street'),
-  ('5', '12347', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street');
+INSERT INTO Property (property_id, realtor_id, postal_code, property_type, date_built, sq_ft, date_added, num_beds, num_baths, address, image_url)
+VALUES ('1', '12345', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2, '1A-139 Drake Street', 'http://www.hpuriageplus.com/wp-content/uploads/2017/07/the-kelvin-apartments-exterior.jpg'),
+  ('2', '12345', 'V6L 3B4', 'Apt/Condo', '1974-09-12', 1316, '2013-12-13', 2, 2, '409-2101 Mcmullen Avenue', 'https://ar.rdcpix.com/1039039409/04b26a2e47defab576081f6b4a529302c-f0xd-w1020_h770_q80.jpg'),
+  ('3', '12346', 'V5L 1K3', 'Townhouse', '2018-05-29', 1468, '2014-08-29', 3, 3, '2036 Franklin Street', 'https://na.rdcpix.com/90885237/8ecb8b5c10a19ccbe1daba7bc38ec77cw-c303855xd-w685_h860_q80.jpg'),
+  ('4', '12347', 'V6N 1N3', 'House', '2016-12-10', 4132, '2018-01-03', 6, 6, '4928 Blenheim Street', 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  ('5', '12347', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street', 'http://www.vanrealty.ca/images/metrotown-townhouse_500.jpg');
 
 
 CREATE TABLE ForSale (

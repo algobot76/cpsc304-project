@@ -62,12 +62,14 @@
                                                     <div class="carousel-item">
                                                 </c:otherwise>
                                             </c:choose>
-                                                <img src="${row2.image_url}" style="width: 100%;" alt="...">
-                                                <div class="carousel-caption d-none d-md-block">
-                                                    <h5>${row2.room_name}</h5>
-                                                </div>
+                                                <img src="${row2.image_url}" style="width: 100%; height:auto;" alt="...">
                                             </div>
                                         </c:forEach>
+                                        <div>
+                                            <div class="carousel-item" style="width: 100%; height:auto;" alt="...">
+                                                <img src="${propertyDetails.image_url}">
+                                            </div>
+                                        </div>
                                     </div>
                                     <a class="carousel-control-prev" href="#carouselGalleryIndicators" role="button" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -94,7 +96,7 @@
                         </nav>
                         
                     </div>
-                    <div class="propertyDescription">
+                    <div class="propertyDescriptionHeader">
                         <h1>
                             ${propertyDetails.address}
                             <span>
@@ -102,20 +104,15 @@
                             </span>
                         </h1>
                         <h3>
-                            <span>
-                                ${propertyDetails.num_beds} beds
-                            </span>
-                            <span>
-                                /
-                            </span>
-                            <span>
-                                ${propertyDetails.sq_ft} sqft
-                            </span>
+                            ${propertyDetails.property_type} &middot ${propertyDetails.num_beds} beds &middot ${propertyDetails.sq_ft} sqft
                         </h3>
                     </div>
                     <div class="propertyPriceDetails">
                         <h1>${typeString}</h1>
                         <h2>$${propertyDetails.price}</h2>
+                    </div>
+                    
+                    <div class="propertyDescription">
                         
                     </div>
                 </div>

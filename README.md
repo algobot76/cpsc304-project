@@ -3,10 +3,6 @@
 - [CPSC 304 Project](#cpsc-304-project)
   - [Project Description](#project-description)
   - [Queries](#queries)
-  - [Roadmap](#roadmap)
-    - [Frontend](#frontend)
-    - [Backend](#backend)
-    - [Database](#database)
 
 ## Project Description
 
@@ -20,18 +16,4 @@ This project will be implemented using the CS department’s oracle database, JD
 
 ## Queries
 
-[The queries used in the project](QUERIES.md)
-
-## Roadmap
-
-### Frontend
-
-### Backend
-
-### Database
-
-- [ ] Double check the database schema
-- [ ] Add more data
-- [ ] Create queries for realtors to manage the database
-- [ ] Create queries for reports
-- [ ] Add triggers
+[Queries used in the project](QUERIES.md)

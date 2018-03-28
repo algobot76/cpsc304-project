@@ -7,6 +7,7 @@
       - [Add a new entry into `ForRent` table](#add-a-new-entry-into-forrent-table)
       - [Add a new entry into `ForSale` table](#add-a-new-entry-into-forsale-table)
       - [Add a new entry into `Sold` table](#add-a-new-entry-into-sold-table)
+      - [Add a new entry into `Rented` table](#add-a-new-entry-into-rented-table)
       - [Add a new entry into `Feature` table](#add-a-new-entry-into-feature-table)
     - [Delete entries](#delete-entries)
       - [Delete an entry from `Property` table](#delete-an-entry-from-property-table)
@@ -53,6 +54,13 @@ VALUES('3','4500000');
 ```sql
 INSERT INTO Sold
 VALUES('1', '23456800','2012-03-07','4');
+```
+
+#### Add a new entry into `Rented` table
+
+```sql
+INSERT INTO Sold
+VALUES('7', '54456000','2013-03-07','5');
 ```
 
 #### Add a new entry into `Feature` table

@@ -26,6 +26,8 @@
     - [Find the customers who has contacted all the realtors](#find-the-customers-who-has-contacted-all-the-realtors)
       - [SQL](#sql)
       - [Result](#result)
+  - [Aggregation query](#aggregation-query)
+    - [For each property, find the property of lowest rental price](#for-each-property-find-the-property-of-lowest-rental-price)
   - [Nested Aggregation with Group-by](#nested-aggregation-with-group-by)
     - [Find the highest/lowest average price of `ForSale` properties](#find-the-highestlowest-average-price-of-forsale-properties)
       - [SQL (MAX)](#sql-max)
@@ -250,6 +252,17 @@ WHERE NOT EXISTS(
 |customer_id|
 |---|
 | 4 |
+
+##  Aggregation query
+
+### For each property, find the property of lowest rental price
+
+```sql
+SELECT property_id MIN(rent)
+FROM property P ForRent R
+WHERE P.property_id = R.property_id
+GROUP BY property_id
+```
 
 ## Nested Aggregation with Group-by
 

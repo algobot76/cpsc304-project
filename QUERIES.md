@@ -150,3 +150,9 @@ FROM (SELECT AVG(S.price) AS avg_price
 ## Queries for Reports
 
 ### Find the total number of sales this year
+
+```sql
+SELECT COUNT(property_id) AS num_properties
+FROM RentalDatabase.Sold
+WHERE YEAR(date_sold) = YEAR(CURDATE());
+```

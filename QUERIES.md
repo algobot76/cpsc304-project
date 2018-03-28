@@ -132,6 +132,7 @@ VALUES('3','4500000');
 ```
 
 Before
+
 |property_id   | price    |
 |---|---------|
 | 1 | 2000000 |
@@ -139,6 +140,7 @@ Before
 
 
 After
+
 |  property_id |  price       |
 |---|---------|
 | 1 | 2000000 |
@@ -156,6 +158,8 @@ VALUES('half furnished', 'The whole house/apt\r half furnished', '2');
 ```
 
 Before
+
+
 | feature_name        | description                | property_id|
 |---------------------|----------------------------|---|
 | fully_furnished     | The_whorehouse/aptfurnished| 4  |
@@ -163,6 +167,8 @@ Before
 | partially_furnished | kitchen_has_been_furnished | 1 |
 
 After
+
+
 | feature_name        | description                |property_id  |
 |---------------------|----------------------------|---|
 | fully_furnished     | The_whorehouse/apt         | 4 |

@@ -9,6 +9,7 @@
       - [Add a new entry into `Sold` table](#add-a-new-entry-into-sold-table)
       - [Add a new entry into `Rented` table](#add-a-new-entry-into-rented-table)
       - [Add a new entry into `Feature` table](#add-a-new-entry-into-feature-table)
+      - [Add a new entry into `Room` table](#add-a-new-entry-into-room-table)
     - [Delete entries](#delete-entries)
       - [Delete an entry from `Property` table](#delete-an-entry-from-property-table)
   - [Division Query](#division-query)
@@ -68,6 +69,13 @@ VALUES('7', '54456000','2013-03-07','5');
 ```sql
 INSERT INTO Feature
 VALUES('half furnished', 'The whole house/apt\r half furnished', '2');
+```
+
+#### Add a new entry into `Room` table
+
+```sql
+INSERT INTO Room
+VALUES ('Kitchen', '6', 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhIWFRU')
 ```
 
 ### Delete entries

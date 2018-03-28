@@ -58,6 +58,11 @@
                             
                             <br></br>
                             
+                            <strong>Property ID:</strong>
+                            <input class="int_val" type="text" readonly="true" name="id_input" value="${propertyDetails.property_id}" />
+                            
+                            <br></br>
+
                             <strong>Property Type</strong>
                             <select name="type_id">
                                     <option value="rental">Rental</option>
@@ -114,27 +119,20 @@
                 // but no text, so myText is not null, but 
                 // a zero length string instead.
         %>
-        <%  } else { 
-                String sqlUpdateString = "UPDATE Property p "
-                        + "SET p.address = '" + addressVal + "' , "
-                        + "p.sq_ft = " + sqFtVal + " , "
-                        + "p.num_beds = " + bedVal + " , "
-                        + "p.num_baths = " + bathVal + " "
-                        + "WHERE p.property_id = " + propertyId;
-                pageContext.setAttribute("sqlUpdateString", sqlUpdateString);
+        <%  } else {
         %>
             <sql:update var="sqlUpdate" dataSource="jdbc/RentalSite">
-                
-                <c:set var="sqlString" value="${sqlUpdateString}" />
-                <c:set var="search" value="'" />
-                <c:set var="replace" value="\\'" />
-                ${fn:replace(sqlString, '"', '\\"')}
-                
+                UPDATE Property p 
+                SET p.address = '${param.address_input}',
+                p.sq_ft = ${param.sqft_input},
+                p.num_beds = ${param.bed_input},
+                p.num_baths = ${param.bath_input}
+                WHERE p.property_id = ${param.id_input}
             </sql:update>
             
-<!--            <script type="text/javascript">
+            <script type="text/javascript">
                 location.reload();
-            </script>-->
+            </script>
         <%
             }
         }

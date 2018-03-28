@@ -157,7 +157,7 @@ CREATE TABLE Sold (
 );
 
 INSERT Sold
-VALUES ('1', 1900000, '2018-03-27', '2'), ('6', 2200000, '2018-03-29', '2');
+VALUES ('5', 3300000, '2018-03-28', '1'), ('6', 2200000, '2018-03-29', '2');
 
 CREATE TABLE Rented (
   property_id CHAR(10),

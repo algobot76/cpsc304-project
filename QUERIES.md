@@ -13,6 +13,10 @@
       - [Delete an entry from `Property` table](#delete-an-entry-from-property-table)
         - [SQL](#sql)
         - [Result](#result)
+  - [Division Queries](#division-queries)
+    - [Find the customers who has contacted all the realtors](#find-the-customers-who-has-contacted-all-the-realtors)
+      - [SQL](#sql)
+      - [Result](#result)
 
 ## Queries for Updating Tables
 
@@ -130,3 +134,28 @@ Any SQL statement that deletes an entry from the `Property` table will also dele
 |---|------|
 | 1 | 3000 |
 | 2 | 4000 |
+
+## Division Queries
+
+### Find the customers who has contacted all the realtors
+
+#### SQL
+
+```sql
+SELECT DISTINCT CCR1.customer_id
+FROM CustomerContactRealtor CCR1
+WHERE NOT EXISTS(
+    SELECT CCR2.realtor_id
+    FROM CustomerContactRealtor CCR2
+    WHERE CCR2.realtor_id NOT IN
+          (SELECT CCR3.realtor_id
+           FROM CustomerContactRealtor CCR3
+           WHERE CCR3.customer_id = CCR1.customer_id)
+);
+```
+
+#### Result
+
+|customer_id|
+|---|
+| 4 |

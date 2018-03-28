@@ -236,3 +236,20 @@ INSERT INTO CustomerContactRealtor VALUES ('1', '12345', '2017-04-08 00:00:00',
    'Luckily friends do ashamed to do suppose. Tried meant mr smile so. Exquisite behaviour as to middleton perfectly. Chicken no wishing waiting am. Say concerns dwelling graceful six humoured. Whether mr'),
   ('4', '12346', '2018-04-13 00:00:00',
    'Real sold my in call. Invitation on an advantages collecting. But event old above shy bed noisy. Had sister see wooded favour income has. Stuff rapid since do as hence. Too insisted ignorant procured');
+
+CREATE PROCEDURE check_for_sale_price(IN price INT)
+  BEGIN
+    IF price <= 0
+    THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Price is invalid';
+    END IF;
+  END;
+
+CREATE TRIGGER for_sale_before_insert
+  BEFORE INSERT
+  ON ForSale
+  FOR EACH ROW
+  BEGIN
+    CALL check_for_sale_price(new.price);
+  END;

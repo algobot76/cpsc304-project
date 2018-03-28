@@ -26,7 +26,8 @@ INSERT INTO PostalCode
 VALUES ('V5L 3X8', 'Vancouver', 'BC'), ('V6E 1A3', 'Vancouver', 'BC'), ('V6K 1N9', 'Vancouver', 'BC'),
   ('V6S 1A5', 'Vancouver', 'BC'), ('V6T 1W6', 'Vancouver', 'BC'), ('V6Z 2T7', 'Vancouver', 'BC'),
   ('V6L 3B4', 'Vancouver', 'BC'), ('V5L 1K3', 'Vancouver', 'BC'), ('V6N 1N3', 'Vancouver', 'BC'),
-  ('V6T 1Z4', 'Vancouver', 'BC');
+  ('V6T 1Z4', 'Vancouver', 'BC'), ('M9B 4T1', 'Toronto', 'ON'), ('M5V 2G3', 'Toronto', 'ON'),
+  ('H2G 3G7', 'Montreal', 'QC');
 
 
 CREATE TABLE Customer (
@@ -80,7 +81,7 @@ INSERT INTO Realtor VALUES ('6135550192', 'MarkRWilson@teleworm.us', 'Mark R. Wi
 
 CREATE TABLE Property (
   property_id   CHAR(10),
-  address       CHAR(50) NOT NULL,
+  realtor_id    CHAR(10) NOT NULL,
   postal_code   CHAR(7),
   property_type CHAR(50),
   date_built    DATE,
@@ -88,7 +89,7 @@ CREATE TABLE Property (
   date_added    DATE,
   num_beds      INT,
   num_baths     FLOAT,
-  realtor_id    CHAR(10) NOT NULL,
+  address       CHAR(50) NOT NULL,
   PRIMARY KEY (property_id),
   FOREIGN KEY (realtor_id) REFERENCES Realtor (realtor_id)
     ON UPDATE CASCADE
@@ -98,12 +99,15 @@ CREATE TABLE Property (
     ON DELETE NO ACTION
 );
 
-INSERT INTO Property (property_id, realtor_id, postal_code, property_type, date_built, sq_ft, date_added, num_beds, num_baths, address)
+INSERT INTO Property
 VALUES ('1', '12345', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2, '1A-139 Drake Street'),
   ('2', '12345', 'V6L 3B4', 'Apt/Condo', '1974-09-12', 1316, '2013-12-13', 2, 2, '409-2101 Mcmullen Avenue'),
   ('3', '12346', 'V5L 1K3', 'Townhouse', '2018-05-29', 1468, '2014-08-29', 3, 3, '2036 Franklin Street'),
   ('4', '12347', 'V6N 1N3', 'House', '2016-12-10', 4132, '2018-01-03', 6, 6, '4928 Blenheim Street'),
-  ('5', '12347', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street');
+  ('5', '12347', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street'),
+  ('6', '12347', 'M9B 4T1', 'House', '2018-09-30', '2550', '2018-12-12', 4, 4.5, '95B Laurel Avenue'),
+  ('7', '12346', 'M5V 2G3', 'Apt/Condo', '2017-03-08', 600, '2018-01-01', 1, 1, '1302-88 Blue Jays Way'),
+  ('8', '12346', 'H2G 3G7', 'Apt/Condo', '1990-11-08', 179, '2013-11-09', 0, 1, '213-5850 Av. Papineau');
 
 
 CREATE TABLE ForSale (
@@ -115,7 +119,7 @@ CREATE TABLE ForSale (
     ON DELETE CASCADE
 );
 
-INSERT INTO ForSale VALUES ('1', 2000000), ('4', 3400000);
+INSERT INTO ForSale VALUES ('1', 2000000), ('4', 3400000), ('6', 2300000), ('7', 635800), ('8', 300000);
 
 CREATE TABLE ForRent (
   property_id CHAR(10),

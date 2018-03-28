@@ -4,44 +4,26 @@
   - [Queries for Updating Tables](#queries-for-updating-tables)
     - [Add entries](#add-entries)
       - [Add a new entry into `Property` table](#add-a-new-entry-into-property-table)
-        - [SQL](#sql)
-        - [Result](#result)
       - [Add a new entry into `ForRent` table](#add-a-new-entry-into-forrent-table)
-        - [SQL](#sql)
-        - [Result](#result)
       - [Add a new entry into `ForSale` table](#add-a-new-entry-into-forsale-table)
-        - [SQL](#sql)
-        - [Result](#result)
       - [Add a new entry into `Sold` table](#add-a-new-entry-into-sold-table)
-        - [SQL](#sql)
-        - [Result](#result)
       - [Add a new entry into `Feature` table](#add-a-new-entry-into-feature-table)
-        - [SQL](#sql)
-        - [Result](#result)
     - [Delete entries](#delete-entries)
       - [Delete an entry from `Property` table](#delete-an-entry-from-property-table)
-        - [SQL](#sql)
-        - [Result](#result)
-  - [Division Queries](#division-queries)
+  - [Division Query](#division-query)
     - [Find the customers who has contacted all the realtors](#find-the-customers-who-has-contacted-all-the-realtors)
-      - [SQL](#sql)
-      - [Result](#result)
-  - [Aggregation query](#aggregation-query)
+  - [Aggregation Query](#aggregation-query)
     - [For each property, find the property of lowest rental price](#for-each-property-find-the-property-of-lowest-rental-price)
   - [Nested Aggregation with Group-by](#nested-aggregation-with-group-by)
     - [Find the highest/lowest average price of `ForSale` properties](#find-the-highestlowest-average-price-of-forsale-properties)
-      - [SQL (MAX)](#sql-max)
-      - [Result (MAX)](#result-max)
-      - [SQL (MIN)](#sql-min)
-      - [Result (MIN)](#result-min)
+      - [Using `MAX()`](#using-max)
+      - [Using `MIN()`](#using-min)
 
 ## Queries for Updating Tables
 
 ### Add entries
 
 #### Add a new entry into `Property` table
-
-##### SQL
 
 ```sql
 INSERT INTO PostalCode
@@ -52,187 +34,48 @@ INSERT INTO Property
 VALUES ('6', '12345', 'M2R 2Z1', 'Apt/Condo', '1990-07-29', 999, '2014-03-01', 1, 1, '305-135 Antibes Drive');
 ```
 
-##### Result
-
-Before
-
-|property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_beds|num_baths|realtor_id|
-|---|--------------------------|---------|-----------|------------|------|------------|---|---|-------|
-| 1 | 1A-139 Drake Street      | V6Z 2T7 | Apt/Condo | 1996-04-21 | 1100 | 2016-05-01 | 2 | 2 | 12345 |
-| 2 | 409-2101 Mcmullen Avenue | V6L 3B4 | Apt/Condo | 1974-09-12 | 1316 | 2013-12-13 | 2 | 2 | 12345 |
-| 3 | 2036 Franklin Street     | V5L 1K3 | Townhouse | 2018-05-29 | 1468 | 2014-08-29 | 3 | 3 | 12346 |
-| 4 | 4928 Blenheim Street     | V6N 1N3 | House     | 2016-12-10 | 4132 | 2018-01-03 | 6 | 6 | 12347 |
-| 5 | 2034 Franklin Street     | V5L 1K3 | Townhouse | 1998-07-31 | 1445 | 2015-07-29 | 3 | 3 | 12347 |
-
-After
-
-|property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_beds|num_baths|realtor_id|
-|---|--------------------------|---------|-----------|------------|------|------------|---|---|-------|
-| 1 | 1A-139 Drake Street      | V6Z 2T7 | Apt/Condo | 1996-04-21 | 1100 | 2016-05-01 | 2 | 2 | 12345 |
-| 2 | 409-2101 Mcmullen Avenue | V6L 3B4 | Apt/Condo | 1974-09-12 | 1316 | 2013-12-13 | 2 | 2 | 12345 |
-| 3 | 2036 Franklin Street     | V5L 1K3 | Townhouse | 2018-05-29 | 1468 | 2014-08-29 | 3 | 3 | 12346 |
-| 4 | 4928 Blenheim Street     | V6N 1N3 | House     | 2016-12-10 | 4132 | 2018-01-03 | 6 | 6 | 12347 |
-| 5 | 2034 Franklin Street     | V5L 1K3 | Townhouse | 1998-07-31 | 1445 | 2015-07-29 | 3 | 3 | 12347 |
-| 6 | 305-135 Antibes Drive    | M2R 2Z1 | Apt/Condo | 1990-07-29 | 999  | 2014-03-01 | 1 | 1 | 12345 |
-
 #### Add a new entry into `ForRent` table
-
-##### SQL
 
 ```sql
 INSERT INTO ForRent
 VALUES ('6', 1250);
 ```
 
-##### Result
-
-Before
-
-|property_id|rent|
-|---|------|
-| 1 | 3000 |
-| 2 | 4000 |
-| 3 | 5000 |
-
-After
-
-|property_id|rent|
-|---|------|
-| 1 | 3000 |
-| 2 | 4000 |
-| 3 | 5000 |
-| 6 | 1250 |
-
 #### Add a new entry into `ForSale` table
-
-##### SQL
 
 ```sql
 INSERT INTO ForSale
 VALUES('3','4500000');
 ```
 
-##### Result
-
-Before
-
-|property_id   | price    |
-|---|---------|
-| 1 | 2000000 |
-| 4 | 3400000 |
-
-After
-
-|  property_id |  price       |
-|---|---------|
-| 1 | 2000000 |
-| 3 | 4500000 |
-| 4 | 3400000 |
-
 #### Add a new entry into `Sold` table
-
-##### SQL
 
 ```sql
 INSERT INTO Sold
 VALUES('1', '23456800','2012-03-07','4');
 ```
 
-##### Result
-
-Before
-
-|property_id |final_price|date_sold|customer_id|
-|------------|-----------------------|---------------------|---|
-
-After
-
-| property_id|final_price|date_sold|customer_id|
-|---|----------|------------|---|
-| 1 | 23456800 | 2012-03-07 | 4 |
-
 #### Add a new entry into `Feature` table
-
-##### SQL
 
 ```sql
 INSERT INTO Feature
 VALUES('half furnished', 'The whole house/apt\r half furnished', '2');
 ```
 
-##### Result
-
-Before
-
-| feature_name        | description                | property_id|
-|---------------------|----------------------------|---|
-| fully_furnished     | The_whorehouse/aptfurnished| 4  |
-| parking             | street parking             | 2 |
-| partially_furnished | kitchen_has_been_furnished | 1 |
-
-After
-
-| feature_name        | description                |property_id  |
-|---------------------|----------------------------|---|
-| fully_furnished     | The_whorehouse/apt         | 4 |
-| half furnished      | The whole house/apt        | 3 |
-| parking             | street parking             | 2 |
-| partially_furnished | kitchen_has_been_furnished | 1 |
-
 ### Delete entries
 
 #### Delete an entry from `Property` table
-
-##### SQL
 
 ```sql
 DELETE FROM Property
 WHERE property_id = '3';
 ```
 
-##### Result
-
-Before
-
-|property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_beds|num_baths|realtor_id|
-|---|--------------------------|---------|-----------|------------|------|------------|---|---|-------|
-| 1 | 1A-139 Drake Street      | V6Z 2T7 | Apt/Condo | 1996-04-21 | 1100 | 2016-05-01 | 2 | 2 | 12345 |
-| 2 | 409-2101 Mcmullen Avenue | V6L 3B4 | Apt/Condo | 1974-09-12 | 1316 | 2013-12-13 | 2 | 2 | 12345 |
-| 3 | 2036 Franklin Street     | V5L 1K3 | Townhouse | 2018-05-29 | 1468 | 2014-08-29 | 3 | 3 | 12346 |
-| 4 | 4928 Blenheim Street     | V6N 1N3 | House     | 2016-12-10 | 4132 | 2018-01-03 | 6 | 6 | 12347 |
-| 5 | 2034 Franklin Street     | V5L 1K3 | Townhouse | 1998-07-31 | 1445 | 2015-07-29 | 3 | 3 | 12347 |
-
-After
-
-|property_id|address|postal_code|property_type|date_built|sq_ft|date_added|num_beds|num_baths|realtor_id|
-|---|--------------------------|---------|-----------|------------|------|------------|---|---|-------|
-| 1 | 1A-139 Drake Street      | V6Z 2T7 | Apt/Condo | 1996-04-21 | 1100 | 2016-05-01 | 2 | 2 | 12345 |
-| 2 | 409-2101 Mcmullen Avenue | V6L 3B4 | Apt/Condo | 1974-09-12 | 1316 | 2013-12-13 | 2 | 2 | 12345 |
-| 4 | 4928 Blenheim Street     | V6N 1N3 | House     | 2016-12-10 | 4132 | 2018-01-03 | 6 | 6 | 12347 |
-| 5 | 2034 Franklin Street     | V5L 1K3 | Townhouse | 1998-07-31 | 1445 | 2015-07-29 | 3 | 3 | 12347 |
-
 Any SQL statement that deletes an entry from the `Property` table will also delete the corresponding entry from  the `ForSale`, `ForRent`, `Sold`, or `Rented` table.
 
-`ForRent` table before:
-
-|property_id|rent|
-|---|------|
-| 1 | 3000 |
-| 2 | 4000 |
-| 3 | 5000 |
-
-`ForRent` table after:
-
-|property_id|rent|
-|---|------|
-| 1 | 3000 |
-| 2 | 4000 |
-
-## Division Queries
+## Division Query
 
 ### Find the customers who has contacted all the realtors
-
-#### SQL
 
 ```sql
 SELECT DISTINCT CCR1.customer_id
@@ -247,13 +90,7 @@ WHERE NOT EXISTS(
 );
 ```
 
-#### Result
-
-|customer_id|
-|---|
-| 4 |
-
-##  Aggregation query
+## Aggregation Query
 
 ### For each property, find the property of lowest rental price
 
@@ -268,7 +105,7 @@ GROUP BY property_id
 
 ### Find the highest/lowest average price of `ForSale` properties
 
-#### SQL (MAX)
+#### Using `MAX()`
 
 ```sql
 SELECT MAX(AvgPrices.avg_price) AS max_avg_price
@@ -278,12 +115,12 @@ FROM (SELECT AVG(S.price) AS avg_price
       GROUP BY PC.province) AS AvgPrices;
 ```
 
-#### Result (MAX)
+#### Using `MIN()`
 
-|max_avg_price
-|--------------|
-| 2700000.0000 |
-
-#### SQL (MIN)
-
-#### Result (MIN)
+```sql
+SELECT MIN(AvgPrices.avg_price) AS min_avg_price
+FROM (SELECT AVG(S.price) AS avg_price
+      FROM Property P, ForSale S, PostalCode PC
+      WHERE S.property_id = P.property_id AND P.postal_code = PC.postal_code
+      GROUP BY PC.province) AS AvgPrices;
+```

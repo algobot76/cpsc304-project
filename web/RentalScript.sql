@@ -90,6 +90,7 @@ CREATE TABLE Property (
   num_beds      INT,
   num_baths     FLOAT,
   address       CHAR(50) NOT NULL,
+  image_url   TEXT,
   PRIMARY KEY (property_id),
   FOREIGN KEY (realtor_id) REFERENCES Realtor (realtor_id)
     ON UPDATE CASCADE
@@ -99,12 +100,13 @@ CREATE TABLE Property (
     ON DELETE NO ACTION
 );
 
+
 INSERT INTO Property
-VALUES ('1', '12345', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2, '1A-139 Drake Street'),
-  ('2', '12345', 'V6L 3B4', 'Apt/Condo', '1974-09-12', 1316, '2013-12-13', 2, 2, '409-2101 Mcmullen Avenue'),
-  ('3', '12346', 'V5L 1K3', 'Townhouse', '2018-05-29', 1468, '2014-08-29', 3, 3, '2036 Franklin Street'),
-  ('4', '12347', 'V6N 1N3', 'House', '2016-12-10', 4132, '2018-01-03', 6, 6, '4928 Blenheim Street'),
-  ('5', '12347', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street'),
+VALUES ('1', '12345', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2, '1A-139 Drake Street', 'http://www.hpuriageplus.com/wp-content/uploads/2017/07/the-kelvin-apartments-exterior.jpg'),
+  ('2', '12345', 'V6L 3B4', 'Apt/Condo', '1974-09-12', 1316, '2013-12-13', 2, 2, '409-2101 Mcmullen Avenue', 'https://ar.rdcpix.com/1039039409/04b26a2e47defab576081f6b4a529302c-f0xd-w1020_h770_q80.jpg'),
+  ('3', '12346', 'V5L 1K3', 'Townhouse', '2018-05-29', 1468, '2014-08-29', 3, 3, '2036 Franklin Street', 'https://na.rdcpix.com/90885237/8ecb8b5c10a19ccbe1daba7bc38ec77cw-c303855xd-w685_h860_q80.jpg'),
+  ('4', '12347', 'V6N 1N3', 'House', '2016-12-10', 4132, '2018-01-03', 6, 6, '4928 Blenheim Street', 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
+  ('5', '12347', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street', 'http://www.vanrealty.ca/images/metrotown-townhouse_500.jpg');
   ('6', '12347', 'M9B 4T1', 'House', '2018-09-30', '2550', '2018-12-12', 4, 4.5, '95B Laurel Avenue'),
   ('7', '12346', 'M5V 2G3', 'Apt/Condo', '2017-03-08', 600, '2018-01-01', 1, 1, '1302-88 Blue Jays Way'),
   ('8', '12346', 'H2G 3G7', 'Apt/Condo', '1990-11-08', 179, '2013-11-09', 0, 1, '213-5850 Av. Papineau');
@@ -124,7 +126,7 @@ VALUES ('4', 3400000), ('7', 635800), ('8', 300000);
 
 CREATE TABLE ForRent (
   property_id CHAR(10),
-  rent        INT,
+  price       INT,
   PRIMARY KEY (property_id),
   FOREIGN KEY (property_id) REFERENCES Property (property_id)
     ON UPDATE CASCADE

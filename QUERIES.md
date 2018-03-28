@@ -9,6 +9,15 @@
       - [Add a new entry into `ForRent` table](#add-a-new-entry-into-forrent-table)
         - [SQL](#sql)
         - [Result](#result)
+      - [Add a new entry into `ForSale` table](#add-a-new-entry-into-forsale-table)
+        - [SQL](#sql)
+        - [Result](#result)
+      - [Add a new entry into `Sold` table](#add-a-new-entry-into-sold-table)
+        - [SQL](#sql)
+        - [Result](#result)
+      - [Add a new entry into `Feature` table](#add-a-new-entry-into-feature-table)
+        - [SQL](#sql)
+        - [Result](#result)
     - [Delete entries](#delete-entries)
       - [Delete an entry from `Property` table](#delete-an-entry-from-property-table)
         - [SQL](#sql)
@@ -85,6 +94,82 @@ After
 | 2 | 4000 |
 | 3 | 5000 |
 | 6 | 1250 |
+
+#### Add a new entry into `ForSale` table
+
+##### SQL
+
+```sql
+INSERT INTO ForSale
+VALUES('3','4500000');
+```
+
+##### Result
+
+Before
+
+|property_id   | price    |
+|---|---------|
+| 1 | 2000000 |
+| 4 | 3400000 |
+
+After
+
+|  property_id |  price       |
+|---|---------|
+| 1 | 2000000 |
+| 3 | 4500000 |
+| 4 | 3400000 |
+
+#### Add a new entry into `Sold` table
+
+##### SQL
+
+```sql
+INSERT INTO Sold
+VALUES('1', '23456800','2012-03-07','4');
+```
+
+##### Result
+
+Before
+
+|property_id |final_price|date_sold|customer_id|
+|------------|-----------------------|---------------------|---|
+
+After
+
+| property_id|final_price|date_sold|customer_id|
+|---|----------|------------|---|
+| 1 | 23456800 | 2012-03-07 | 4 |
+
+#### Add a new entry into `Feature` table
+
+##### SQL
+
+```sql
+INSERT INTO Feature
+VALUES('half furnished', 'The whole house/apt\r half furnished', '2');
+```
+
+##### Result
+
+Before
+
+| feature_name        | description                | property_id|
+|---------------------|----------------------------|---|
+| fully_furnished     | The_whorehouse/aptfurnished| 4  |
+| parking             | street parking             | 2 |
+| partially_furnished | kitchen_has_been_furnished | 1 |
+
+After
+
+| feature_name        | description                |property_id  |
+|---------------------|----------------------------|---|
+| fully_furnished     | The_whorehouse/apt         | 4 |
+| half furnished      | The whole house/apt        | 3 |
+| parking             | street parking             | 2 |
+| partially_furnished | kitchen_has_been_furnished | 1 |
 
 ### Delete entries
 

@@ -140,7 +140,7 @@ CREATE TABLE ForRent (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
-INSERT INTO ForRent VALUES (1, 3000), (2, 4000), (3, 5000);
+INSERT INTO ForRent VALUES (1, 3000);
 
 CREATE TABLE Sold (
   property_id CHAR(10),
@@ -157,7 +157,7 @@ CREATE TABLE Sold (
 );
 
 INSERT Sold
-VALUES ('1', 1900000, '2018-03-27', '2'), ('6', 2200000, '2018-03-29', '2');
+VALUES ('5', 3300000, '2018-03-28', '1'), ('6', 2200000, '2018-03-29', '2');
 
 CREATE TABLE Rented (
   property_id CHAR(10),

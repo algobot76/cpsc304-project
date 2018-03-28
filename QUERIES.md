@@ -244,3 +244,15 @@ WHERE NOT EXISTS(
 |customer_id|
 |---|
 | 4 |
+
+
+##  Aggregation query
+
+### For each property, find the property of lowest rental price
+
+```sql
+SELECT property_id MIN(rent)
+FROM property P ForRent R
+WHERE P.property_id = R.property_id
+GROUP BY property_id
+```

@@ -38,7 +38,15 @@
     <c:out value="${roomsSql}"/>
 </sql:query>
 
+<sql:query var="realtorQuery" dataSource="jdbc/RentalSite">
+    SELECT R.*, O.* FROM Realtor R 
+    INNER JOIN Property P ON R.realtor_id = P.realtor_id
+    INNER JOIN RealtyOffice O ON R.branch_id = O.branch_id
+    where P.property_id = '${param.property_id}';
+</sql:query>
+
 <c:set var="propertyDetails" value="${propertyQuery.rows[0]}"/>
+<c:set var="realtorDetails" value="${realtorQuery.rows[0]}"/>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <body>
@@ -85,11 +93,13 @@
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-map-tab" data-toggle="tab" href="#nav-map" role="tab" aria-controls="nav-home" aria-selected="true">
-                                    <span class="map-icon"></span>
+                                    <i class="fas fa-map-marker-alt"></i>
                                     <span>Map</span>
                                 </a>
                                 <a class="nav-item nav-link" id="nav-gallery-tab" data-toggle="tab" href="#nav-gallery" role="tab" aria-controls="nav-profile" aria-selected="false">
-                                    <span class="gallery-icon"></span>
+                                    <span class="gallery-icon">
+                                        <i class="fas fa-th"></i>
+                                    </span>
                                     <span>Gallery</span>
                                 </a>
                             </div>
@@ -113,7 +123,56 @@
                     </div>
                     
                     <div class="propertyDescription">
-                        
+                        TODO
+                    </div>
+                    
+                    <div class="realtorContactInfo">
+                        <div class="card">
+                            <div class="card-header">
+                                Realtor Contact Info
+                            </div>
+                            <div class="card-body realtor-details">
+                                <p class="card-text">
+                                    ${realtorDetails.name}<br>
+                                    ${realtorDetails.phone}<br>
+                                    ${realtorDetails.email}
+                                </p>
+                            </div>
+                                <div class="card-body realtor-contact-form">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="Name" placeholder="Your Name">
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-phone"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="Phone" placeholder="Phone Number">
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                        <input type="text" class="form-control" aria-label="Email" placeholder="Email">
+                                    </div>
+                                    
+                                    <div class="input-group">
+                                        <textarea class="form-control" aria-label="Contact Message" placeholder="Contact Message"></textarea>
+                                    </div>
+                                    
+                                    <a href="#" class="btn btn-primary submit-button">Submit</a>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>

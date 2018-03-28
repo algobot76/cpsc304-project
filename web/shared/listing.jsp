@@ -14,9 +14,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title> </title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div style="width:100%; height:100%;">
+        <div class="listings content">
+            <div class="numResults">${fn:length(propertyQuery.rows)} results</div>
             <c:choose>
                 <c:when test="${fn:length(propertyQuery.rows) > 0}"> 
                     <div class="row">
@@ -40,7 +42,7 @@
                 <c:otherwise>
                     <div class="no-results">
                         <div class="alert alert-warning" role="alert">
-                            Could not find any posting matching the search criteria. <a href="#" class="alert-link">Click here</a> to start a new search!
+                            Could not find any posting matching the search criteria. <a href="javascript:history.back()" class="alert-link">Click here</a> to start a new search!
                         </div>
                     </div>
                 </c:otherwise>

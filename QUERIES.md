@@ -26,6 +26,12 @@
     - [Find the customers who has contacted all the realtors](#find-the-customers-who-has-contacted-all-the-realtors)
       - [SQL](#sql)
       - [Result](#result)
+  - [Nested Aggregation with Group-by](#nested-aggregation-with-group-by)
+    - [Find the highest/lowest average price of `ForSale` properties](#find-the-highestlowest-average-price-of-forsale-properties)
+      - [SQL (MAX)](#sql-max)
+      - [Result (MAX)](#result-max)
+      - [SQL (MIN)](#sql-min)
+      - [Result (MIN)](#result-min)
 
 ## Queries for Updating Tables
 
@@ -244,3 +250,27 @@ WHERE NOT EXISTS(
 |customer_id|
 |---|
 | 4 |
+
+## Nested Aggregation with Group-by
+
+### Find the highest/lowest average price of `ForSale` properties
+
+#### SQL (MAX)
+
+```sql
+SELECT MAX(AvgPrices.avg_price) AS max_avg_price
+FROM (SELECT AVG(S.price) AS avg_price
+      FROM Property P, ForSale S, PostalCode PC
+      WHERE S.property_id = P.property_id AND P.postal_code = PC.postal_code
+      GROUP BY PC.province) AS AvgPrices;
+```
+
+#### Result (MAX)
+
+|max_avg_price
+|--------------|
+| 2700000.0000 |
+
+#### SQL (MIN)
+
+#### Result (MIN)

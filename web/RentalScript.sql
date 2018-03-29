@@ -222,7 +222,15 @@ VALUES ('Kitchen', '1',
   ('Master Washroom', '4',
    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnek3zfZ1L0Hy2eghfD0bHZ5jk1El9LuQJiiAcvAve1_N-dlhk3g'),
   ('Master Washroom', '5',
-   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY--XHEe0PUsgh4PFKNYWKIivRcBa7LOIfG1cL2k_UkrmZL_QnxA');
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY--XHEe0PUsgh4PFKNYWKIivRcBa7LOIfG1cL2k_UkrmZL_QnxA'),
+  ('Master Kitchen', '7',
+   'https://fthmb.tqn.com/tmIq4DxeK2ThfRgBS2kPhB8NvRo=/4050x2700/filters:fill(auto,1)/Small_Kitchen_Ideas_SmallSpace.about.com-56a887095f9b58b7d0f314bb.jpg'),
+  ('Master Washroom', '7',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7gB4hcu6xi-BiFjwId81p5JeGg3bLEFiUxBIenYWVy_dXdePXjw'),
+  ('Master Kitchen', '8',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4F8gQ_fhK9cGCwF58a2E5s0yfd8Y5C3wHuuR_e2XHol0GebNm'),
+  ('Master Washroom', '8',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Z4Dwp0EzZ0xRXZq0QmTqLAGZirDi8BnfVfh-l6Ljo74JHz6U');
 
 CREATE TABLE CustomerContactRealtor (
   message_id      INT AUTO_INCREMENT,

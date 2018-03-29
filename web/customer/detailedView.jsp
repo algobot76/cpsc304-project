@@ -124,10 +124,8 @@
                                                 <img src="${row2.image_url}" style="width: 100%; height:auto;" alt="...">
                                             </div>
                                         </c:forEach>
-                                        <div>
-                                            <div class="carousel-item" style="width: 100%; height:auto;" alt="...">
-                                                <img src="${propertyDetails.image_url}">
-                                            </div>
+                                        <div class="carousel-item" style="width: 100%; height:auto;" alt="...">
+                                            <img src="${propertyDetails.image_url}">
                                         </div>
                                     </div>
                                     <a class="carousel-control-prev" href="#carouselGalleryIndicators" role="button" data-slide="prev">

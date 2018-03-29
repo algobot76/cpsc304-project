@@ -4,7 +4,10 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <sql:query var="propertyQuery" dataSource="jdbc/RentalSite">
-    <c:out value="${param.sqlString}"/>
+    <c:out value="${param.sqlString}"/> 
+    AND Property.num_beds >= <c:out value="${param.numBeds}"/> 
+    AND Property.num_baths >= <c:out value="${param.numBaths}"/> 
+    AND PostalCode.city LIKE '%<c:out value="${param.cityInput}"/>%'
 </sql:query>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -48,7 +51,7 @@
                 </c:otherwise>
             </c:choose>
         </div>
-        
+
         <div class="modal modalView" id="modalView" role="dialog"></div>
     </body>
 </html>

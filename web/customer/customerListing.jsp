@@ -15,102 +15,112 @@
     String typeId = request.getParameter("type_id");
     String address = request.getParameter("addr_input");
     String tableToJoin = typeId.equals("rental") ? "ForRent" : "ForSale";
-    
+    String cityInput = request.getParameter("city_input");
+
     Integer priceFrom = Integer.parseInt(request.getParameter("price_from"));
     Integer priceTo = Integer.parseInt(request.getParameter("price_to"));
-    
+
     Integer sqftFrom = Integer.parseInt(request.getParameter("sqft_from"));
     Integer sqftTo = Integer.parseInt(request.getParameter("sqft_to"));
-    
+
+    Integer numBeds = Integer.parseInt(request.getParameter("bed_input"));
+    Integer numBaths = Integer.parseInt(request.getParameter("bath_input"));
+
     String sqlString = "select Property.*, Postalcode.*, {{tableName}}.price "
-                        + "from Property, PostalCode, {{tableName}} "
-                        + "WHERE Property.postal_code = PostalCode.postal_code "
-                        + "AND {{tableName}}.property_id = Property.property_id "
-                        + "AND ( {{tableName}}.price BETWEEN " + priceFrom + " AND " + priceTo + ") "
-                        + "AND ( Property.sq_ft BETWEEN " + sqftFrom + " AND " + sqftTo + ") ";
-    
+            + "from Property, PostalCode, {{tableName}} "
+            + "WHERE Property.postal_code = PostalCode.postal_code "
+            + "AND {{tableName}}.property_id = Property.property_id "
+            + "AND ( {{tableName}}.price BETWEEN " + priceFrom + " AND " + priceTo + ") "
+            + "AND ( Property.sq_ft BETWEEN " + sqftFrom + " AND " + sqftTo + ") ";
+
     sqlString = sqlString.replace("{{tableName}}", tableToJoin);
     System.out.println("here is the input " + priceFrom.getClass().getName() + ", " + priceTo.getClass().getName() + ", " + sqftTo.getClass().getName() + ", " + sqftFrom.getClass().getName());
     System.out.println(sqlString);
 
+    pageContext.setAttribute("numBeds", numBeds);
+    pageContext.setAttribute("numBaths", numBaths);
+    pageContext.setAttribute("cityInput", cityInput);
     pageContext.setAttribute("sqlString", sqlString);
 %>
 
 <jsp:include page="/shared/listing.jsp">
     <jsp:param name="sqlString" value="${sqlString}"/>
+    <jsp:param name="numBeds" value="${numBeds}"/>
+    <jsp:param name="numBaths" value="${numBaths}"/>
+    <jsp:param name="cityInput" value="${cityInput}"/>
 </jsp:include>
 
 <script type="text/javascript">
-$( function() {
-    var geocoder;
-    var map;
-    function initialize(address) {
-      geocoder = new google.maps.Geocoder();
-      var latlng = new google.maps.LatLng(-34.397, 150.644);
-      var myOptions = {
-        zoom: 15,
-        center: latlng,
-      mapTypeControl: true,
-      mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
-      navigationControl: true,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      
-      if (geocoder) {
-        geocoder.geocode( { 'address': address }, function(results, status) {
-          var infowindow;
-          var marker;
-          if (status == google.maps.GeocoderStatus.OK) {
-            if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-                myOptions.center = results[0].geometry.location;
+    $(function () {
+        var geocoder;
+        var map;
+        function initialize(address) {
+            geocoder = new google.maps.Geocoder();
+            var latlng = new google.maps.LatLng(-34.397, 150.644);
+            var myOptions = {
+                zoom: 15,
+                center: latlng,
+                mapTypeControl: true,
+                mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+                navigationControl: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
 
-                infowindow = new google.maps.InfoWindow(
-                    { content: '<b>'+address+'</b>',
-                        size: new google.maps.Size(150,50)
-                    });
+            if (geocoder) {
+                geocoder.geocode({'address': address}, function (results, status) {
+                    var infowindow;
+                    var marker;
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+                            myOptions.center = results[0].geometry.location;
 
-                marker = new google.maps.Marker({
-                    position: results[0].geometry.location,
-                    title:address
-                }); 
+                            infowindow = new google.maps.InfoWindow(
+                                    {content: '<b>' + address + '</b>',
+                                        size: new google.maps.Size(150, 50)
+                                    });
 
-                map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
-                marker.setMap(map);
-                google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.open(map,marker);
+                            marker = new google.maps.Marker({
+                                position: results[0].geometry.location,
+                                title: address
+                            });
+
+                            map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+                            marker.setMap(map);
+                            google.maps.event.addListener(marker, 'click', function () {
+                                infowindow.open(map, marker);
+                            });
+                        } else {
+                            alert("No results found");
+                        }
+                    } else {
+                        alert("Geocode was not successful for the following reason: " + status);
+                    }
                 });
-            } else {
-              alert("No results found");
             }
-          } else {
-            alert("Geocode was not successful for the following reason: " + status);
-          }
+        }
+
+        $(".listing_item").on("click", function () {
+            var url = [location.protocol, '//', location.host, "/RentalSite/customer/detailedView.jsp?"].join('');
+            var $listItem = $(this);
+            var uriParams = {
+                "property_id": $listItem.attr("property_id"),
+                "type_id": $listItem.attr("type_id")
+            }
+
+            var uri = Object.keys(uriParams).map(key => {
+                return [key, uriParams[key]].map(encodeURIComponent).join("=");
+            }).join("&");
+
+            $.ajax(url + uri, {
+                success: result => {
+                    var modal = $(".modalView");
+                    modal.html(result);
+                    var $result = $(result);
+                    var $navMap = $result.find("#nav-map");
+                    var address = $navMap.attr("address");
+                    initialize(address);
+                }
+            });
         });
-      }
-    }
- 
-    $( ".listing_item" ).on( "click", function() {
-      var url = [location.protocol, '//', location.host, "/RentalSite/customer/detailedView.jsp?"].join('');
-      var $listItem = $(this);
-      var uriParams = {
-          "property_id": $listItem.attr("property_id"),
-          "type_id": $listItem.attr("type_id")
-      }
-      
-      var uri = Object.keys(uriParams).map(key => {
-        return [key, uriParams[key]].map(encodeURIComponent).join("=");
-      }).join("&");
-      
-      $.ajax(url + uri, {
-         success: result => {
-             var modal = $(".modalView");
-             modal.html(result);
-             var $result = $(result);
-             var $navMap = $result.find("#nav-map");
-             var address = $navMap.attr("address");
-             initialize(address);
-         } 
-      });
     });
-  } );
 </script>

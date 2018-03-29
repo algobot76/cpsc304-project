@@ -11,14 +11,12 @@ and open the template in the editor.
   width: 16px;
   height: 16px;
   display: inline-block;
-  color: black;
 }
 .gallery-icon {
   width: 16px;
   height: 16px;
   background-size: 16px 16px;
   display: inline-block;
-  color: black;
 }
 .no-results {
   width: 100%;

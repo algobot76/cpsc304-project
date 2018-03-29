@@ -1,6 +1,7 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <%-- 
     Document   : detailedView
@@ -48,6 +49,33 @@
 <c:set var="propertyDetails" value="${propertyQuery.rows[0]}"/>
 <c:set var="realtorDetails" value="${realtorQuery.rows[0]}"/>
 
+
+<script>
+    $( function() { 
+    $( ".submit-button" ).on( "click", function() {
+      var url = [location.protocol, '//', location.host, "/RentalSite/customer/createCustomerContactRealtor.jsp?"].join('');
+      var $realtorContactForm = $(".realtor-contact-form");
+      var uriParams = {
+          "realtor_id": $realtorContactForm.attr("realtor_id"),
+          "customer_name": $realtorContactForm.find("#form-name").val(),
+          "customer_email": $realtorContactForm.find("#form-email").val(),
+          "customer_phone": $realtorContactForm.find("#form-phone").val(),
+          "customer_message": $realtorContactForm.find("#form-contact-message").val(),
+      }
+      
+      var uri = Object.keys(uriParams).map(key => {
+        return [key, uriParams[key]].map(encodeURIComponent).join("=");
+      }).join("&");
+      
+      $.ajax(url + uri, {
+         success: result => {
+             alert("success");
+             console.log(result);
+         } 
+      });
+    });
+  } );
+</script>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
     <body>
         <div class="modal-dialog modal-lg">
@@ -138,14 +166,14 @@
                                     ${realtorDetails.email}
                                 </p>
                             </div>
-                                <div class="card-body realtor-contact-form">
+                                <div class="card-body realtor-contact-form" realtor_id="${realtorDetails.realtor_id}">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">
                                                 <i class="fas fa-user"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" aria-label="Name" placeholder="Your Name">
+                                        <input id="form-name" type="text" class="form-control" aria-label="Name" placeholder="Your Name">
                                     </div>
                                     
                                     <div class="input-group">
@@ -154,7 +182,7 @@
                                                 <i class="fas fa-phone"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" aria-label="Phone" placeholder="Phone Number">
+                                        <input id="form-phone" type="text" class="form-control" aria-label="Phone" placeholder="Phone Number">
                                     </div>
                                     
                                     <div class="input-group">
@@ -163,11 +191,11 @@
                                                 <i class="fas fa-envelope"></i>
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control" aria-label="Email" placeholder="Email">
+                                        <input id="form-email" type="text" class="form-control" aria-label="Email" placeholder="Email">
                                     </div>
                                     
                                     <div class="input-group">
-                                        <textarea class="form-control" aria-label="Contact Message" placeholder="Contact Message"></textarea>
+                                        <textarea id="form-contact-message" class="form-control" aria-label="Contact Message" placeholder="Contact Message"></textarea>
                                     </div>
                                     
                                     <a href="#" class="btn btn-primary submit-button">Submit</a>

@@ -21,7 +21,18 @@
     </head>
     <body>
         <div class="listings content">
-            <div class="numResults">${fn:length(propertyQuery.rows)} results</div>
+            <div class="listings-header">
+                <div class="listings-count">
+                    <div class="numResults">${fn:length(propertyQuery.rows)} results</div>
+                </div>
+                <div class="listings-refresh">
+                    <div class="refresh-button">
+                        <a type="button" onClick="window.location.href=window.location.href">
+                            <i class="fas fa-sync"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <c:choose>
                 <c:when test="${fn:length(propertyQuery.rows) > 0}"> 
                     <div class="row">

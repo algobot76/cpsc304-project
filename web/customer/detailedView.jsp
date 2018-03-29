@@ -52,7 +52,10 @@
 
 <script>
     $(function () {
-        $(".submit-button").on("click", function () {
+        'use strict';
+
+        var submitButtonHandler = function () {
+            console.log("gothere");
             var url = [location.protocol, '//', location.host, "/RentalSite/customer/createCustomerContactRealtor.jsp?"].join('');
             var $realtorContactForm = $(".realtor-contact-form");
             var uriParams = {
@@ -69,14 +72,30 @@
 
             $.ajax(url + uri, {
                 success: result => {
-                    alert("success");
+                    alert("Message has been sent!");
                     console.log(result);
+                    $realtorContactForm.find(".submit-button").addClass("disabled");
+                    $realtorContactForm.find(".submit-button").attr("disabled", "disabled");
                 },
                 error: err => {
                     alert("Sorry, the email address is invalid");
                     console.log(err);
                 }
             });
+        }
+
+        var $form = $(".needs-validation");
+        $form.on("submit", function (event) {
+            var isValid = $form[0].checkValidity()
+            if (isValid === false) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            $form.addClass('was-validated');
+            if (isValid === true) {
+                submitButtonHandler();
+            }
+            return false;
         });
     });
 </script>
@@ -170,14 +189,14 @@
                                     ${realtorDetails.email}
                                 </p>
                             </div>
-                            <div class="card-body realtor-contact-form" realtor_id="${realtorDetails.realtor_id}">
+                            <form class="card-body realtor-contact-form needs-validation" realtor_id="${realtorDetails.realtor_id}" novalidate>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
                                             <i class="fas fa-user"></i>
                                         </span>
                                     </div>
-                                    <input id="form-name" type="text" class="form-control" aria-label="Name" placeholder="Your Name">
+                                    <input id="form-name" autocomplete="name" type="text" class="form-control" aria-label="Name" placeholder="Your Name" required>
                                 </div>
 
                                 <div class="input-group">
@@ -186,7 +205,7 @@
                                             <i class="fas fa-phone"></i>
                                         </span>
                                     </div>
-                                    <input id="form-phone" type="text" class="form-control" aria-label="Phone" placeholder="Phone Number">
+                                    <input id="form-phone" autocomplete="tel-national" type="text" class="form-control" aria-label="Phone" placeholder="Phone Number" required>
                                 </div>
 
                                 <div class="input-group">
@@ -195,15 +214,15 @@
                                             <i class="fas fa-envelope"></i>
                                         </span>
                                     </div>
-                                    <input id="form-email" type="text" class="form-control" aria-label="Email" placeholder="Email">
+                                    <input id="form-email" autocomplete="email" type="text" class="form-control" aria-label="Email" placeholder="Email" required>
                                 </div>
 
                                 <div class="input-group">
-                                    <textarea id="form-contact-message" class="form-control" aria-label="Contact Message" placeholder="Contact Message"></textarea>
+                                    <textarea maxlength="200" id="form-contact-message" class="form-control" aria-label="Contact Message" placeholder="Contact Message" required></textarea>
                                 </div>
 
-                                <a href="#" class="btn btn-primary submit-button">Submit</a>
-                            </div>
+                                <button type="submit" class="btn btn-primary submit-button">Submit</button>
+                            </form>
                         </div>
                     </div>
                 </div>

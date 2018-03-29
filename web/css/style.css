@@ -57,6 +57,13 @@ and open the template in the editor.
   padding-left: 50px;
   padding-right: 50px;
 }
+.listings-header .listings-count {
+  display: inline-block;
+}
+.listings-header .listings-refresh {
+  padding-right: 10px;
+  display: inline-block;
+}
 .listing_item {
   margin: 25px;
 }

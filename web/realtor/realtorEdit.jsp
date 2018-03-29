@@ -1,9 +1,9 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-<%-- 
+<%--
     Document   : realtorEdit
     Created on : 26-Mar-2018, 2:34:54 AM
     Author     : Darren
@@ -99,7 +99,7 @@
                         <br></br>
 
                         <strong>Number of baths</strong>
-                        <input type="text" name="bath_input" value="${propertyDetails.num_baths}" />  
+                        <input type="text" name="bath_input" value="${propertyDetails.num_baths}" />
 
                         <br></br>
 
@@ -129,17 +129,17 @@
     </sql:update>
     <%  } else {
         if (priceVal == null && sqFtVal == null && addressVal == null && bedVal == null && bathVal == null) {
-            // All are null when the page is first requested, 
+            // All are null when the page is first requested,
             // so do nothing
         } else {
             if (priceVal.length() == 0 && sqFtVal.length() == 0 && addressVal.length() == 0 && bedVal.length() == 0 && bathVal.length() == 0) {
                 // There was a querystring like ?myText=
-                // but no text, so myText is not null, but 
+                // but no text, so myText is not null, but
                 // a zero length string instead.
             } else {
     %>
     <sql:update var="sqlUpdate" dataSource="jdbc/RentalSite">
-        UPDATE Property p 
+        UPDATE Property p
         SET p.address = '${param.address_input}',
         p.sq_ft = ${param.sqft_input},
         p.num_beds = ${param.bed_input},
@@ -147,11 +147,11 @@
         WHERE p.property_id = ${param.id_input}
     </sql:update>
 
-    <!--Need to have separate updates per table-->    
+    <!--Need to have separate updates per table-->
     <sql:update var="sqlUpdatePrice" dataSource="jdbc/RentalSite">
-        UPDATE <c:out value="${propertyTypeTable}"/> type
-        INNER JOIN Property p on ${param.id_input} = type.property_id
-        SET type.price = ${param.price_input}
+        UPDATE <c:out value="${propertyTypeTable}"/>
+        SET price = ${param.price_input}
+        WHERE property_id = ${param.id_input};
     </sql:update>
 
     <script type="text/javascript">

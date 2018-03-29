@@ -253,19 +253,16 @@ VALUES (1, '12345', '2017-04-08 00:00:00',
   (4, '12346', '2018-04-13 00:00:00',
    'Real sold my in call. Invitation on an advantages collecting. But event old above shy bed noisy. Had sister see wooded favour income has. Stuff rapid since do as hence. Too insisted ignorant procured');
 
-CREATE PROCEDURE check_for_sale_price(IN price INT)
-  BEGIN
-    IF price <= 0
-    THEN
-      SIGNAL SQLSTATE '45000'
-      SET MESSAGE_TEXT = 'Price is invalid';
-    END IF;
-  END;
-
-CREATE TRIGGER for_sale_before_insert
+DELIMITER $$
+CREATE TRIGGER email_before_insert
   BEFORE INSERT
-  ON ForSale
+  ON Customer
   FOR EACH ROW
   BEGIN
-    CALL check_for_sale_price(new.price);
-  END;
+    IF new.email NOT REGEXP '^[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$'
+    THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Email is invalid!';
+    END IF;
+  END $$
+DELIMITER ;

@@ -30,64 +30,67 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
-        <h1>Rent Stuff</h1><table border="0">
-            <thead>
-                <tr>
-                    <th>Housing Units</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><form action="${pageContext.request.contextPath}${param.formAction}">
-                            <strong>Choose Property Type</strong>
-                            <select name="type_id">
+        <div class="content search">
+            <h1>Rent Stuff</h1><table border="0">
+                <thead>
+                    <tr>
+                        <th>Housing Units</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><form action="${pageContext.request.contextPath}${param.formAction}">
+                                <strong>Choose Property Type</strong>
+                                <select name="type_id">
                                     <option value="rental">Rental</option>
                                     <option value="sale">Sale</option>
-                            </select>
-                            <br></br>
-                            
-                            <strong>Search by price range:</strong>
-                            <strong>From</strong>
-                            <input class="int_val" type="text" name="price_from" value="" />
-                            
-                            <strong>To</strong>
-                            <input class="int_val" type="text" name="price_to" value="" />
-                            
-                            <br></br>
+                                </select>
+                                <br></br>
 
-                            <strong>Search by footage:</strong>
-                            <strong>From</strong>
-                            <input class="int_val" type="text" name="sqft_from" value="" />
-                            
-                            <strong>To</strong>
-                            <input class="int_val" type="text" name="sqft_to" value="" />
-                            
-                            <br></br>
-                            
-                            <strong>Search by city</strong>
-                            <input type="text" name="city_input" value="" />
-                            
-                            <br></br>
-                            
-                            <strong>Number of beds</strong>
-                            <input type="text" name="city_input" value="" />
-                            
-                            <br></br>
-                            
-                            <strong>Number of baths</strong>
-                            <input type="text" name="city_input" value="" />
+                                <strong>Search by price range:</strong>
+                                <strong>From</strong>
+                                <input class="int_val" type="text" name="price_from" value="" />
 
-                           
-                            <br></br>
-                            <input type="submit" value="submit" name="submit" />
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                                <strong>To</strong>
+                                <input class="int_val" type="text" name="price_to" value="" />
+
+                                <br></br>
+
+                                <strong>Search by footage:</strong>
+                                <strong>From</strong>
+                                <input class="int_val" type="text" name="sqft_from" value="" />
+
+                                <strong>To</strong>
+                                <input class="int_val" type="text" name="sqft_to" value="" />
+
+                                <br></br>
+
+                                <strong>Search by city</strong>
+                                <input type="text" name="city_input" value="" />
+
+                                <br></br>
+
+                                <strong>Number of beds</strong>
+                                <input type="text" name="city_input" value="" />
+
+                                <br></br>
+
+                                <strong>Number of baths</strong>
+                                <input type="text" name="city_input" value="" />
+
+
+                                <br></br>
+                                <input type="submit" value="submit" name="submit" />
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
 
     </body>
 </html>

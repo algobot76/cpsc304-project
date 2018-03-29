@@ -9,24 +9,34 @@ and open the template in the editor.
 */
 
 .map-icon {
-    background-image: url(../images/mapicon.svg);
     width: 16px;
     height: 16px;
     display: inline-block;
+    color: black;
 }
 
 .gallery-icon {
-    background-image: url(../images/galleryicon.png);
     width: 16px;
     height: 16px;
     background-size: 16px 16px;
     display: inline-block;
+    color: black;
 }
 
 .no-results {
     width: 100%;
     height: 100%;
-    padding: 50px;
+    padding-top: 25px;
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+    padding: 25px;
+}
+
+.navbar {
+    font-size: 1rem !important;
 }
 
 .propertyDescriptionHeader {
@@ -116,6 +126,19 @@ and open the template in the editor.
                 max-height:50vh;
                 overflow:hidden;
             }
+        }
+    }
+}
+
+.realtorContactInfo {
+    .realtor-details {
+        padding-bottom: 0;
+    }
+    .realtor-contact-form {
+        padding-top: 10px;
+        
+        .submit-button {
+            margin-top: 10px;
         }
     }
 }

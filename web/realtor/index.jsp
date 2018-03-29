@@ -107,6 +107,14 @@
 
                             <div id="messages_table" class="table table-striped"> 
                             </div>
+
+                            <a href="#" class="btn btn-success" id="test" onClick="fnExcelReport();">Export to Excel</a>
+
+
+
+
+
+
                         </div>
                         <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
                             <div class="card">
@@ -186,7 +194,7 @@
                 $(".aggregateTable").append('<tr><td>"${sqlMinAggregate.rowsByIndex[0][0]}"</td></tr>');
             }
         });
-        
+
         $(".realtorLogin").on("click", function () {
             realtorID = $(".realtor_id").val();
             var messageChecked = $("#message_box").is(":checked");
@@ -211,6 +219,9 @@
                     $("#messages_table").empty();
                     $("#messages_table").append(result);
                     $("#messages_table > table").addClass("table table-hover");
+                    $("#messages_table").attr('id', 'myTable');
+                    $("#messages_table").attr('rules', 'groups');
+                    $("#messages_table").attr('frame', 'hsides');
                     console.log(result);
                 },
 //                error: err => {
@@ -220,4 +231,44 @@
             });
         })
     });
+
+    function fnExcelReport() {
+        if (!$("#message_box").is(":checked") && !$("#customer_name").is(":checked") && !$("#customer_email").is(":checked") &&
+                !$("#customer_phone").is(":checked") && !$("#date_box").is(":checked") && $("#messages_table").is(':empty')) {
+            alert("No checkboxes selected!");
+            return;
+        }
+
+        var tab_text = '<html xmlns:x="urn:schemas-microsoft-com:office:excel">';
+        tab_text = tab_text + '<head><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
+
+        tab_text = tab_text + '<x:Name>Test Sheet</x:Name>';
+
+        tab_text = tab_text + '<x:WorksheetOptions><x:Panes></x:Panes></x:WorksheetOptions></x:ExcelWorksheet>';
+        tab_text = tab_text + '</x:ExcelWorksheets></x:ExcelWorkbook></xml></head><body>';
+
+        tab_text = tab_text + "<table border='1px'>";
+        tab_text = tab_text + $('#myTable').html();
+        tab_text = tab_text + '</table></body></html>';
+
+        var data_type = 'data:application/vnd.ms-excel';
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+            if (window.navigator.msSaveBlob) {
+                var blob = new Blob([tab_text], {
+                    type: "application/csv;charset=utf-8;"
+                });
+                navigator.msSaveBlob(blob, 'Test file.xls');
+            }
+        } else {
+            $('#test').attr('href', data_type + ', ' + encodeURIComponent(tab_text));
+            $('#test').attr('download', 'Test file.xls');
+        }
+
+    }
 </script>
+
+

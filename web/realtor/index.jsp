@@ -117,14 +117,14 @@
                             <a href="#" class="btn btn-success" id="test" onClick="fnExcelReport();">Export to Excel</a>
                         </div>
                         <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
-                            <strong>Reports</strong>
+                            <h2>Reports</h2>
                             <br>
                             <div id="accordion">
                                 <div class="card">
                                     <div class="card-header" id="headingOne">
                                         <h5 class="mb-0">
                                             <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Find the highest/lowest average price of all ForSale properties
+                                                Highest/lowest average price of ForSale properties grouped by Province
                                             </button>
                                         </h5>
                                     </div>
@@ -193,14 +193,9 @@
                                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
                                         <div class="card-body">
                                             <table class="table table-hover salesReportTable ">
-                                                <c:forEach var="row" items="${totalSalesQuery.rowsByIndex}">
-                                                    <tr>
-                                                        <td>Test</td>
-                                                        <c:forEach var="column" items="${row}">
-                                                            <td><c:out value="${column}"/></td>
-                                                        </c:forEach>
-                                                    </tr>
-                                                </c:forEach>
+                                                <tr>
+                                                    <td>Properties sold this year</td><td><c:out value="${totalSalesQuery.rows[0].num_properties}"/></td>
+                                                </tr>
                                             </table>
                                         </div>
                                     </div>
@@ -219,13 +214,15 @@
     $(function () {
         var html = '';
         $(".aggregateButton").on("click", function () {
+            var maxAggregate = (parseFloat(${sqlMaxAggregate.rowsByIndex[0][0]}) || 0).toFixed(2);
+            var minAggregate = (parseFloat(${sqlMinAggregate.rowsByIndex[0][0]}) || 0).toFixed(2);
             $(".aggregateTable").find("tr:gt(0)").remove();
             if ($("#aggregate_input").find(":selected").text() == "MAX") {
                 $(".aggregateTable tr>th:first").html("Maximum Average Price");
-                $(".aggregateTable").append('<tr><td>"${sqlMaxAggregate.rowsByIndex[0][0]}"</td></tr>');
+                $(".aggregateTable").append('<tr><td>$' + maxAggregate + '</td></tr>');
             } else {
                 $(".aggregateTable tr>th:first").html("Minimum Average Price");
-                $(".aggregateTable").append('<tr><td>"${sqlMinAggregate.rowsByIndex[0][0]}"</td></tr>');
+                $(".aggregateTable").append('<tr><td>$' + minAggregate + '</td></tr>');
             }
         });
 

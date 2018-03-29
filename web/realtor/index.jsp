@@ -3,6 +3,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBuqQSkoLK_yz9xEqNR5y2W6zsIdhlrygg"></script>
+
 <sql:query var="sqlMaxAggregate" dataSource="jdbc/RentalSite">
     SELECT MAX(AvgPrices.avg_price) AS max_avg_price
     FROM (SELECT AVG(S.price) AS avg_price
@@ -21,16 +28,14 @@
 
 <!--Report Queries-->
 <sql:query var="divisionQuery" dataSource="jdbc/RentalSite">
-    SELECT DISTINCT CCR1.customer_id
+    select C.* from Customer C INNER JOIN (SELECT DISTINCT CCR1.customer_id
     FROM CustomerContactRealtor CCR1
     WHERE NOT EXISTS(
     SELECT CCR2.realtor_id
     FROM CustomerContactRealtor CCR2
-    WHERE CCR2.realtor_id NOT IN
-    (SELECT CCR3.realtor_id
+    WHERE CCR2.realtor_id NOT IN (SELECT CCR3.realtor_id
     FROM CustomerContactRealtor CCR3
-    WHERE CCR3.customer_id = CCR1.customer_id)
-    );
+    WHERE CCR3.customer_id = CCR1.customer_id))) CCRD on C.customer_id=CCRD.customer_id;
 </sql:query>
 
 <sql:query var="totalSalesQuery" dataSource="jdbc/RentalSite">
@@ -56,6 +61,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Rental Site</title>
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
         <jsp:include page="/shared/navBar.jsp" />
@@ -109,67 +115,95 @@
                             </div>
 
                             <a href="#" class="btn btn-success" id="test" onClick="fnExcelReport();">Export to Excel</a>
-
-
-
-
-
-
                         </div>
                         <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
-                            <div class="card">
-                                <div class="card-body">
-                                    <strong>Find the highest/lowest average price of all ForSale properties</strong>
+                            <strong>Reports</strong>
+                            <br>
+                            <div id="accordion">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Find the highest/lowest average price of all ForSale properties
+                                            </button>
+                                        </h5>
+                                    </div>
 
-                                    <br></br>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <strong>Choose the aggregate function</strong>
 
-                                    <strong>Choose the aggregate function</strong>
+                                            <br></br>
 
-                                    <br></br>
-
-                                    <select id="aggregate_input">
-                                        <option value="min">MIN</option>
-                                        <option value="max">MAX</option>
-                                    </select>
-
-
-                                    <button class="btn btn-info aggregateButton" type="button">Search Value</button>
-                                    <br></br>
+                                            <select id="aggregate_input">
+                                                <option value="min">MIN</option>
+                                                <option value="max">MAX</option>
+                                            </select>
 
 
-                                    <table class="table table-hover aggregateTable ">
-                                        <tr><th></th></tr>
-                                    </table>
+                                            <button class="btn btn-info aggregateButton" type="button">Search Value</button>
+                                            <br></br>
 
+
+                                            <table class="table table-hover aggregateTable ">
+                                                <tr><th></th></tr>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <strong>Reports</strong>
-
-                                    <br></br>
-
-                                    <table class="table table-hover divisionReportTable ">
-                                        <c:forEach var="row" items="${divisionQuery.rowsByIndex}">
-                                            <tr>
-                                                <td>Number of customers who have contacted all realtors:</td>
-                                                <c:forEach var="column" items="${row}">
-                                                    <td><c:out value="${column}"/></td>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Customers who have contacted all realtors
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <table class="table table-hover divisionReportTable">
+                                                <tr>
+                                                    <c:forEach var="columnName" items="${divisionQuery.columnNames}">
+                                                        <th>
+                                                            <c:out value="${columnName}"/>
+                                                        </th>
+                                                    </c:forEach>
+                                                </tr>
+                                                <c:forEach var="row" items="${divisionQuery.rowsByIndex}">
+                                                    <tr>
+                                                        <c:forEach var="column" items="${row}">
+                                                            <td>
+                                                                <c:out value="${column}"/>
+                                                            </td>
+                                                        </c:forEach>
+                                                    </tr>
                                                 </c:forEach>
-                                            </tr>
-                                        </c:forEach>
-                                    </table>
-                                    <br></br>
-                                    <table class="table table-hover salesReportTable ">
-                                        <c:forEach var="row" items="${totalSalesQuery.rowsByIndex}">
-                                            <tr>
-                                                <td>Total number of sales this year:                 </td>
-                                                <c:forEach var="column" items="${row}">
-                                                    <td><c:out value="${column}"/></td>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Total number of sales this year
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <table class="table table-hover salesReportTable ">
+                                                <c:forEach var="row" items="${totalSalesQuery.rowsByIndex}">
+                                                    <tr>
+                                                        <td>Test</td>
+                                                        <c:forEach var="column" items="${row}">
+                                                            <td><c:out value="${column}"/></td>
+                                                        </c:forEach>
+                                                    </tr>
                                                 </c:forEach>
-                                            </tr>
-                                        </c:forEach>
-                                    </table>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

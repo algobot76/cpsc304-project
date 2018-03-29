@@ -134,7 +134,8 @@ CREATE TABLE ForSale (
   PRIMARY KEY (property_id),
   FOREIGN KEY (property_id) REFERENCES Property (property_id)
     ON UPDATE CASCADE
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+  CHECK (price > 0)
 );
 
 INSERT INTO ForSale
@@ -146,7 +147,8 @@ CREATE TABLE ForRent (
   PRIMARY KEY (property_id),
   FOREIGN KEY (property_id) REFERENCES Property (property_id)
     ON UPDATE CASCADE
-    ON DELETE CASCADE
+    ON DELETE CASCADE,
+  CHECK (price > 0)
 );
 INSERT INTO ForRent
 VALUES ('1', 3000), ('9', 4500), ('10', 4900);

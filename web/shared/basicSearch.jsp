@@ -5,11 +5,11 @@
 <script type="text/javascript">
 //    This makes any input become 1 if focus is removed from it AND it contains nothing: 
 //    Allows for no blank inputs to be sent
-    $(document).ready(function(){
-        $(".int_val").map(function(){
-            $(this).blur(function() { 
-                if( $(this).val() == '') {
-                    $(this).val(1); 
+    $(document).ready(function () {
+        $(".int_val").map(function () {
+            $(this).blur(function () {
+                if ($(this).val() == '') {
+                    $(this).val(1);
                 }
             }).val(1)
         })
@@ -30,68 +30,70 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
-        <div class="content search">
-            <h1>Rent Stuff</h1><table border="0">
-                <thead>
-                    <tr>
-                        <th>Housing Units</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td><form action="${pageContext.request.contextPath}${param.formAction}">
-                                <strong>Choose Property Type</strong>
-                                <select name="type_id">
-                                    <option value="rental">Rental</option>
-                                    <option value="sale">Sale</option>
-                                </select>
-                                <br></br>
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h1>Search Properties</h1>
 
-                                <strong>Search by price range:</strong>
-                                <strong>From</strong>
-                                <input class="int_val" type="text" name="price_from" value="" />
+                    <form action="${pageContext.request.contextPath}${param.formAction}">
+                        <strong>Choose Property Type:</strong>
+                        <select name="type_id">
+                            <option value="rental">Rental</option>
+                            <option value="sale">Sale</option>
+                        </select>
+                        <br></br>
 
-                                <strong>To</strong>
-                                <input class="int_val" type="text" name="price_to" value="" />
+                        <strong>Search by Price Range:</strong>
+                        <strong>From</strong>
+                        <input class="int_val" type="text" name="price_from" value="" />
 
-                                <br></br>
+                        <strong>To</strong>
+                        <input class="int_val" type="text" name="price_to" value="" />
 
-                                <strong>Search by footage:</strong>
-                                <strong>From</strong>
-                                <input class="int_val" type="text" name="sqft_from" value="" />
+                        <br></br>
 
-                                <strong>To</strong>
-                                <input class="int_val" type="text" name="sqft_to" value="" />
+                        <strong>Search by Footage:</strong>
+                        <strong>From</strong>
+                        <input class="int_val" type="text" name="sqft_from" value="" />
 
-                                <br></br>
+                        <strong>To</strong>
+                        <input class="int_val" type="text" name="sqft_to" value="" />
 
-                                <strong>Search by city</strong>
-                                <input type="text" name="city_input" value="" />
+                        <br></br>
 
-                                <br></br>
+                        <strong>Search by City:</strong>
+                        <input type="text" name="city_input" value="" />
 
-                                <strong>Number of beds</strong>
-                                <input type="text" name="city_input" value="" />
+                        <br></br>
 
-                                <br></br>
+                        <strong>Number of Beds:</strong>
+                        <select name="bed_input">
+                            <option value="0">0+</option>
+                            <option value="1">1+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                            <option value="5">5+</option>
+                        </select>
 
-                                <strong>Number of baths</strong>
-                                <input type="text" name="city_input" value="" />
+                        <br></br>
 
+                        <strong>Number of Baths:</strong>
+                        <select name="bath_input">
+                            <option value="0">0+</option>
+                            <option value="1">1+</option>
+                            <option value="1.5">1.5+</option>
+                            <option value="2">2+</option>
+                            <option value="3">3+</option>
+                            <option value="4">4+</option>
+                        </select>
 
-                                <br></br>
-                                <input type="submit" value="submit" name="submit" />
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                        <br></br>
+                        <input class="btn btn-info" type="submit" value="Submit" name="submit" />
+                    </form>
+                </div>
+            </div>
         </div>
-        
-
     </body>
 </html>
-    
+

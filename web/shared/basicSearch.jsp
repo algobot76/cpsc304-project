@@ -52,14 +52,14 @@
             var url = [location.protocol, '//', location.host, "/RentalSite" + formAction + "?"].join('');
             var $typeId = $searchForm.find("#type_id");
             var isRental = $typeId.val() === "rental";
-            var priceFrom = $searchForm.find("#price_to").val() || (isRental ? $searchForm.find("#price_from").attr("minRent") : $searchForm.find("#price_from").attr("minSale")) || 0;
+            var priceFrom = $searchForm.find("#price_from").val() || (isRental ? $searchForm.find("#price_from").attr("minRent") : $searchForm.find("#price_from").attr("minSale")) || 0;
             var priceTo = $searchForm.find("#price_to").val() || (isRental ? $searchForm.find("#price_to").attr("maxRent") : $searchForm.find("#price_to").attr("maxSale")) || 0;
             var uriParams = {
                 "type_id": $typeId.val(),
                 "price_from": priceFrom,
                 "price_to": priceTo,
-                "sqft_from": parseInt($searchForm.find("#sqft_from").val() || $searchForm.find("#sqft_from").attr("placeholder")) || 0,
-                "sqft_to": parseInt($searchForm.find("#sqft_to").val() || $searchForm.find("#sqft_to").attr("placeholder")) || 0,
+                "sqft_from": $searchForm.find("#sqft_from").val() || $searchForm.find("#sqft_from").attr("placeholder") || 0,
+                "sqft_to": $searchForm.find("#sqft_to").val() || $searchForm.find("#sqft_to").attr("placeholder") || 0,
                 "city_input": $searchForm.find("#city_input").val(),
                 "bed_input": $searchForm.find("#bed_input").val(),
                 "bath_input": $searchForm.find("#bath_input").val(),
@@ -100,7 +100,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
     </head>
     <body>
-        <div class="container">
+        <div class="container search-container">
             <div class="card panel-default">
                 <div class="card-body">
                     <h1>Search Properties</h1>

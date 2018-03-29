@@ -31,6 +31,9 @@ and open the template in the editor.
 .navbar {
   font-size: 1rem !important;
 }
+.customer-search {
+  padding: 25px;
+}
 .propertyDescriptionHeader {
   display: inline-block;
   width: 67%;

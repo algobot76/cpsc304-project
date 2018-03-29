@@ -46,14 +46,14 @@
     String tableToJoin = typeId.equals("rental") ? "ForRent" : "ForSale";
     String cityInput = request.getParameter("city_input");
 
-    Integer priceFrom = Integer.parseInt(request.getParameter("price_from"));
-    Integer priceTo = Integer.parseInt(request.getParameter("price_to"));
+    Float priceFrom = Float.parseFloat(request.getParameter("price_from"));
+    Float priceTo = Float.parseFloat(request.getParameter("price_to"));
 
-    Integer sqftFrom = Integer.parseInt(request.getParameter("sqft_from"));
-    Integer sqftTo = Integer.parseInt(request.getParameter("sqft_to"));
+    Float sqftFrom = Float.parseFloat(request.getParameter("sqft_from"));
+    Float sqftTo = Float.parseFloat(request.getParameter("sqft_to"));
 
-    Integer numBeds = Integer.parseInt(request.getParameter("bed_input"));
-    Integer numBaths = Integer.parseInt(request.getParameter("bath_input"));
+    Float numBeds = Float.parseFloat(request.getParameter("bed_input"));
+    Float numBaths = Float.parseFloat(request.getParameter("bath_input"));
 
     String sqlString = "select Property.*, Postalcode.*, {{tableName}}.price "
             + "from Property, PostalCode, {{tableName}} "

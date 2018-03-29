@@ -34,16 +34,16 @@ CREATE TABLE Customer (
   phone       CHAR(25),
   email       CHAR(50) NOT NULL,
   name        CHAR(50),
-  customer_id CHAR(10),
+  customer_id INT AUTO_INCREMENT,
   PRIMARY KEY (customer_id),
   UNIQUE (email)
 );
 
-INSERT INTO Customer
-VALUES ('5195850524', 'Marcy@armyspy.com', 'Marcy R. Plascencia', '1'),
-  ('9056029275', 'Wilson@teleworm.us', 'Stephanie D. Wilson', '2'),
-  ('7809200082', 'Watts@teleworm.us', 'Molly B. Watts', '3'),
-  ('2503564541', 'YongHsiung@dayrep.com', 'Yong Hsiung', '4');
+INSERT INTO Customer (phone, email, name)
+VALUES ('5195850524', 'Marcy@armyspy.com', 'Marcy R. Plascencia'),
+  ('9056029275', 'Wilson@teleworm.us', 'Stephanie D. Wilson'),
+  ('7809200082', 'Watts@teleworm.us', 'Molly B. Watts'),
+  ('2503564541', 'YongHsiung@dayrep.com', 'Yong Hsiung');
 
 CREATE TABLE RealtyOffice (
   branch_id   CHAR(10),
@@ -146,7 +146,7 @@ CREATE TABLE Sold (
   property_id CHAR(10),
   final_price INT,
   date_sold   DATE,
-  customer_id CHAR(10),
+  customer_id INT,
   PRIMARY KEY (property_id),
   FOREIGN KEY (property_id) REFERENCES Property (property_id)
     ON UPDATE CASCADE
@@ -157,14 +157,14 @@ CREATE TABLE Sold (
 );
 
 INSERT Sold
-VALUES ('5', 3300000, '2018-03-28', '1'), ('6', 2200000, '2018-03-29', '2');
+VALUES ('5', 3300000, '2018-03-28', 1), ('6', 2200000, '2018-03-29', 2);
 
 CREATE TABLE Rented (
   property_id CHAR(10),
   final_rent  INT,
   from_date   DATE,
   to_date     DATE,
-  customer_id CHAR(10) NOT NULL,
+  customer_id INT NOT NULL,
   PRIMARY KEY (property_id),
   FOREIGN KEY (property_id) REFERENCES Property (property_id)
     ON UPDATE CASCADE
@@ -175,7 +175,7 @@ CREATE TABLE Rented (
 );
 
 INSERT INTO Rented
-VALUES ('2', 3800, '2016-04-01', '2019-04-01', '1'), ('3', 4900, '2018-01-01', '2019-01-01', '2');
+VALUES ('2', 3800, '2016-04-01', '2019-04-01', 1), ('3', 4900, '2018-01-01', '2019-01-01', 2);
 
 CREATE TABLE Feature (
   feature_name CHAR(50),
@@ -225,7 +225,7 @@ VALUES ('Kitchen', '1',
    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY--XHEe0PUsgh4PFKNYWKIivRcBa7LOIfG1cL2k_UkrmZL_QnxA');
 
 CREATE TABLE CustomerContactRealtor (
-  customer_id     CHAR(10),
+  customer_id     INT,
   realtor_id      CHAR(10),
   date            DATE,
   contact_message CHAR(200),
@@ -238,17 +238,17 @@ CREATE TABLE CustomerContactRealtor (
     ON DELETE NO ACTION
 );
 
-INSERT INTO CustomerContactRealtor VALUES ('1', '12345', '2017-04-08 00:00:00',
+INSERT INTO CustomerContactRealtor VALUES (1, '12345', '2017-04-08 00:00:00',
                                            'Be me shall purse my ought times. Joy years doors all would again rooms these. Solicitude announcing as to sufficient my. No my reached suppose proceed pressed perhaps he. Eagerness it delighted prono'),
-  ('2', '12345', '2018-01-02 00:00:00',
+  (2, '12345', '2018-01-02 00:00:00',
    'Started several mistake joy say painful removed reached end. State burst think end are its. Arrived off she elderly beloved him affixed noisier yet. An course regard to up he hardly. View four has sai'),
-  ('3', '12346', '2018-03-12 00:00:00',
+  (3, '12346', '2018-03-12 00:00:00',
    'Doubtful two bed way pleasure confined followed. Shew up ye away no eyes life or were this. Perfectly did suspicion daughters but his intention. Started on society an brought it explain. Position two'),
-  ('4', '12347', '2016-08-01 00:00:00',
+  (4, '12347', '2016-08-01 00:00:00',
    '\nAttachment apartments in delightful by motionless it no. And now she burst sir learn total. Hearing hearted shewing own ask. Solicitude uncommonly use her motionless not collecting age. The properly'),
-  ('4', '12345', '2017-09-01 00:00:00',
+  (4, '12345', '2017-09-01 00:00:00',
    'Luckily friends do ashamed to do suppose. Tried meant mr smile so. Exquisite behaviour as to middleton perfectly. Chicken no wishing waiting am. Say concerns dwelling graceful six humoured. Whether mr'),
-  ('4', '12346', '2018-04-13 00:00:00',
+  (4, '12346', '2018-04-13 00:00:00',
    'Real sold my in call. Invitation on an advantages collecting. But event old above shy bed noisy. Had sister see wooded favour income has. Stuff rapid since do as hence. Too insisted ignorant procured');
 
 CREATE PROCEDURE check_for_sale_price(IN price INT)

@@ -27,7 +27,7 @@ VALUES ('V5L 3X8', 'Vancouver', 'BC'), ('V6E 1A3', 'Vancouver', 'BC'), ('V6K 1N9
   ('V6S 1A5', 'Vancouver', 'BC'), ('V6T 1W6', 'Vancouver', 'BC'), ('V6Z 2T7', 'Vancouver', 'BC'),
   ('V6L 3B4', 'Vancouver', 'BC'), ('V5L 1K3', 'Vancouver', 'BC'), ('V6N 1N3', 'Vancouver', 'BC'),
   ('V6T 1Z4', 'Vancouver', 'BC'), ('M9B 4T1', 'Toronto', 'ON'), ('M5V 2G3', 'Toronto', 'ON'),
-  ('H2G 3G7', 'Montreal', 'QC');
+  ('L9G 4K9', 'Hamilton', 'ON'), ('L8V 1S1', 'Hamilton', 'ON'), ('H2G 3G7', 'Montreal', 'QC');
 
 
 CREATE TABLE Customer (
@@ -74,9 +74,10 @@ CREATE TABLE Realtor (
     ON DELETE CASCADE
 );
 
-INSERT INTO Realtor VALUES ('6135550192', 'MarkRWilson@teleworm.us', 'Mark R. Wilson', '12345', '1'),
-  ('603161977', 'ElliotEForbes@jourrapide.com', 'Elliot E. Forbes', '12346', '2'),
-  ('9058885623', 'ScottCSigler@armyspy.com', 'Scott C. Sigler', '12347', '3');
+INSERT INTO Realtor VALUES ('6135550192', 'MarkRWilson@teleworm.us', 'Mark R. Wilson', '1', '1'),
+  ('603161977', 'ElliotEForbes@jourrapide.com', 'Elliot E. Forbes', '2', '2'),
+  ('9058885623', 'ScottCSigler@armyspy.com', 'Scott C. Sigler', '3', '3'),
+  ('9057923111', 'IanBDurham@teleworm.us ', 'Ian B. Durham', '4', '4');
 
 
 CREATE TABLE Property (
@@ -102,22 +103,26 @@ CREATE TABLE Property (
 
 
 INSERT INTO Property
-VALUES ('1', '12345', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2, '1A-139 Drake Street',
+VALUES ('1', '1', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2, '1A-139 Drake Street',
              'http://www.hpuriageplus.com/wp-content/uploads/2017/07/the-kelvin-apartments-exterior.jpg'),
-  ('2', '12345', 'V6L 3B4', 'Apt/Condo', '1974-09-12', 1316, '2013-12-13', 2, 2, '409-2101 Mcmullen Avenue',
+  ('2', '1', 'V6L 3B4', 'Apt/Condo', '1974-09-12', 1316, '2013-12-13', 2, 2, '409-2101 Mcmullen Avenue',
         'https://ar.rdcpix.com/1039039409/04b26a2e47defab576081f6b4a529302c-f0xd-w1020_h770_q80.jpg'),
-  ('3', '12346', 'V5L 1K3', 'Townhouse', '2018-05-29', 1468, '2014-08-29', 3, 3, '2036 Franklin Street',
+  ('3', '2', 'V5L 1K3', 'Townhouse', '2018-05-29', 1468, '2014-08-29', 3, 3, '2036 Franklin Street',
         'https://na.rdcpix.com/90885237/8ecb8b5c10a19ccbe1daba7bc38ec77cw-c303855xd-w685_h860_q80.jpg'),
-  ('4', '12347', 'V6N 1N3', 'House', '2016-12-10', 4132, '2018-01-03', 6, 6, '4928 Blenheim Street',
+  ('4', '3', 'V6N 1N3', 'House', '2016-12-10', 4132, '2018-01-03', 6, 6, '4928 Blenheim Street',
         'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
-  ('5', '12347', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street',
+  ('5', '3', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street',
         'http://www.vanrealty.ca/images/metrotown-townhouse_500.jpg'),
-  ('6', '12347', 'M9B 4T1', 'House', '2018-09-30', '2550', '2018-12-12', 4, 4.5, '95B Laurel Avenue',
+  ('6', '3', 'M9B 4T1', 'House', '2018-09-30', '2550', '2018-12-12', 4, 4.5, '95B Laurel Avenue',
         'http://php4net.com/wp-content/uploads/2018/02/house-59952-b600.jpg'),
-  ('7', '12346', 'M5V 2G3', 'Apt/Condo', '2017-03-08', 600, '2018-01-01', 1, 1, '1302-88 Blue Jays Way',
+  ('7', '2', 'M5V 2G3', 'Apt/Condo', '2017-03-08', 600, '2018-01-01', 1, 1, '1302-88 Blue Jays Way',
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Haf64iVMQMm9LZ90VspE2brvf_dEPvimku225pUDuVQ8RhcO'),
-  ('8', '12346', 'H2G 3G7', 'Apt/Condo', '1990-11-08', 179, '2013-11-09', 0, 1, '213-5850 Av. Papineau',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHAg3SRiyp93l-Ek2iUDE_YHk7GLVEDQ5RrCyQzjDF1ZIhmM8');
+  ('8', '2', 'H2G 3G7', 'Apt/Condo', '1990-11-08', 179, '2013-11-09', 0, 1, '213-5850 Av. Papineau',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHAg3SRiyp93l-Ek2iUDE_YHk7GLVEDQ5RrCyQzjDF1ZIhmM8'),
+  ('9', '4', 'L9G 4K9', 'House', '2013-01-02', 2800, '2016-09-08', 4, 4.5, '46 Abbey Clse',
+        'https://d3ljd161w9lywl.cloudfront.net/property/image/X4080134/46-abbey-clse-hamilton-on-9587_X4080134-1938890-0_lightbox.jpg'),
+  ('10', '4', 'L8V 1S1', 'House', '2014-05-14', 1100, '2016-01-10', 2, 2.5, '783 E Brucedale Avenue',
+         'https://d3ljd161w9lywl.cloudfront.net/property/image/X4079304/783-e-brucedale-avenue-hamilton-on-2528_X4079304-1937790-0_lightbox.jpg');
 
 
 CREATE TABLE ForSale (
@@ -140,7 +145,8 @@ CREATE TABLE ForRent (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
-INSERT INTO ForRent VALUES (1, 3000);
+INSERT INTO ForRent
+VALUES ('1', 3000), ('9', 4500), ('10', 4900);
 
 CREATE TABLE Sold (
   property_id CHAR(10),
@@ -222,7 +228,21 @@ VALUES ('Kitchen', '1',
   ('Master Washroom', '4',
    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnek3zfZ1L0Hy2eghfD0bHZ5jk1El9LuQJiiAcvAve1_N-dlhk3g'),
   ('Master Washroom', '5',
-   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY--XHEe0PUsgh4PFKNYWKIivRcBa7LOIfG1cL2k_UkrmZL_QnxA');
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY--XHEe0PUsgh4PFKNYWKIivRcBa7LOIfG1cL2k_UkrmZL_QnxA'),
+  ('Master Kitchen', '7',
+   'https://fthmb.tqn.com/tmIq4DxeK2ThfRgBS2kPhB8NvRo=/4050x2700/filters:fill(auto,1)/Small_Kitchen_Ideas_SmallSpace.about.com-56a887095f9b58b7d0f314bb.jpg'),
+  ('Master Washroom', '7',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7gB4hcu6xi-BiFjwId81p5JeGg3bLEFiUxBIenYWVy_dXdePXjw'),
+  ('Master Kitchen', '8',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4F8gQ_fhK9cGCwF58a2E5s0yfd8Y5C3wHuuR_e2XHol0GebNm'),
+  ('Master Washroom', '8',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Z4Dwp0EzZ0xRXZq0QmTqLAGZirDi8BnfVfh-l6Ljo74JHz6U'),
+  ('Master Kitchen', '9', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1gEc9Qrs_fu4pD5cKoHUy8cfbGFLzX6U1X2SlyqSboxNEddieLg'),
+  ('Master Washroom', '9', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGKe3pDcqtT0CaGlk0UFVYwI97vMhJX3UiBJKKR7Yc7FwEkN2S'),
+  ('Master Kitchen', '10',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC3cjSZ5o01ejW0n83FpfrzKM4Ngi-GS6hScNaGg2x6iHNUN_8'),
+  ('Master Washroom', '10',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRimIP3qIkC4utrI0UX-UYWzO-fkhvCOHzgD31EaXvH1EpyAxmVPA');
 
 CREATE TABLE CustomerContactRealtor (
   message_id      INT AUTO_INCREMENT,
@@ -240,17 +260,17 @@ CREATE TABLE CustomerContactRealtor (
 );
 
 INSERT INTO CustomerContactRealtor (customer_id, realtor_id, date, contact_message)
-VALUES (1, '12345', '2017-04-08 00:00:00',
+VALUES (1, '1', '2017-04-08 00:00:00',
         'Be me shall purse my ought times. Joy years doors all would again rooms these. Solicitude announcing as to sufficient my. No my reached suppose proceed pressed perhaps he. Eagerness it delighted prono'),
-  (2, '12345', '2018-01-02 00:00:00',
+  (2, '1', '2018-01-02 00:00:00',
    'Started several mistake joy say painful removed reached end. State burst think end are its. Arrived off she elderly beloved him affixed noisier yet. An course regard to up he hardly. View four has sai'),
-  (3, '12346', '2018-03-12 00:00:00',
+  (3, '2', '2018-03-12 00:00:00',
    'Doubtful two bed way pleasure confined followed. Shew up ye away no eyes life or were this. Perfectly did suspicion daughters but his intention. Started on society an brought it explain. Position two'),
-  (4, '12347', '2016-08-01 00:00:00',
+  (4, '3', '2016-08-01 00:00:00',
    '\nAttachment apartments in delightful by motionless it no. And now she burst sir learn total. Hearing hearted shewing own ask. Solicitude uncommonly use her motionless not collecting age. The properly'),
-  (4, '12345', '2017-09-01 00:00:00',
+  (4, '1', '2017-09-01 00:00:00',
    'Luckily friends do ashamed to do suppose. Tried meant mr smile so. Exquisite behaviour as to middleton perfectly. Chicken no wishing waiting am. Say concerns dwelling graceful six humoured. Whether mr'),
-  (4, '12346', '2018-04-13 00:00:00',
+  (4, '2', '2018-04-13 00:00:00',
    'Real sold my in call. Invitation on an advantages collecting. But event old above shy bed noisy. Had sister see wooded favour income has. Stuff rapid since do as hence. Too insisted ignorant procured');
 
 DELIMITER $$

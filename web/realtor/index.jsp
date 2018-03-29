@@ -219,9 +219,7 @@
                     $("#messages_table").empty();
                     $("#messages_table").append(result);
                     $("#messages_table > table").addClass("table table-hover");
-                    $("#messages_table").attr('id', 'myTable');
-                    $("#messages_table").attr('rules', 'groups');
-                    $("#messages_table").attr('frame', 'hsides');
+                    $("#messages_table > table").attr('id', 'myTable');
                     console.log(result);
                 },
 //                error: err => {

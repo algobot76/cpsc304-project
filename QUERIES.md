@@ -10,6 +10,7 @@
       - [Add a new entry into `Rented` table](#add-a-new-entry-into-rented-table)
       - [Add a new entry into `Feature` table](#add-a-new-entry-into-feature-table)
       - [Add a new entry into `Room` table](#add-a-new-entry-into-room-table)
+      - [Update the info of an customer with an existing email address](#update-the-info-of-an-customer-with-an-existing-email-address)
     - [Delete entries](#delete-entries)
       - [Delete an entry from `Property` table](#delete-an-entry-from-property-table)
   - [Division Query](#division-query)
@@ -78,6 +79,14 @@ VALUES('half furnished', 'The whole house/apt\r half furnished', '2');
 ```sql
 INSERT INTO Room
 VALUES ('Kitchen', '6', 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhIWFRU')
+```
+
+#### Update the info of an customer with an existing email address
+
+```sql
+INSERT INTO Customer (email, phone, name)
+VALUES ('YongHsiung@dayrep.com', '1234', 'foo')
+ON DUPLICATE KEY UPDATE phone = '1234', name = 'foo';
 ```
 
 ### Delete entries

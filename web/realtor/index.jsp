@@ -173,6 +173,7 @@
 </html>
 
 <script type="text/javascript">
+    var realtorID;
     $(function () {
         var html = '';
         $(".aggregateButton").on("click", function () {
@@ -185,5 +186,38 @@
                 $(".aggregateTable").append('<tr><td>"${sqlMinAggregate.rowsByIndex[0][0]}"</td></tr>');
             }
         });
+        
+        $(".realtorLogin").on("click", function () {
+            realtorID = $(".realtor_id").val();
+            var messageChecked = $("#message_box").is(":checked");
+            var cNameChecked = $("#customer_name").is(":checked");
+            var cEmailChecked = $("#customer_email").is(":checked");
+            var cPhoneChecked = $("#customer_phone").is(":checked");
+            var dateChecked = $("#date_box").is(":checked");
+            var url = [location.protocol, '//', location.host, "/RentalSite/realtor/message.jsp?"].join('');
+            var uriParams = {
+                "realtor_id": realtorID,
+                "message_checked": messageChecked,
+                "name_checked": cNameChecked,
+                "email_checked": cEmailChecked,
+                "phone_checked": cPhoneChecked,
+                "date_checked": dateChecked
+            }
+            var uri = Object.keys(uriParams).map(key => {
+                return [key, uriParams[key]].map(encodeURIComponent).join("=");
+            }).join("&");
+            $.ajax(url + uri, {
+                success: result => {
+                    $("#messages_table").empty();
+                    $("#messages_table").append(result);
+                    $("#messages_table > table").addClass("table table-hover");
+                    console.log(result);
+                },
+                error: err => {
+                    alert("Sorry, the ID is invalid");
+                    console.log(err);
+                }
+            });
+        })
     });
 </script>

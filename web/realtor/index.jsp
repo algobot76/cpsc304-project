@@ -40,6 +40,12 @@
     WHERE YEAR(date_sold) = YEAR(CURDATE());
 </sql:query>
 
+<sql:query var="messagesQuery" dataSource="jdbc/RentalSite">
+    SELECT * FROM CustomerContactRealtor 
+    WHERE realtor_id = YEAR(CURDATE());
+</sql:query>
+
+
 <c:set var="maxAggregateDetails" value="${sqlMaxAggregate.rows[0]}"/>
 <c:set var="minAggregateDetails" value="${sqlMinAggregate.rows[0]}"/>
 <%--<c:set var="divisionDetails" value="${divisionQuery.rows[0]}"/>
@@ -72,7 +78,33 @@
                     </jsp:include>
                 </div>
                 <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-                    Messages go here
+
+                    <h2>View Messages</h2>
+                    <br></br>
+                    <strong>Enter your ID</strong>
+                    <input class="realtor_id" type="text" name="realtor_id" value="" />
+                    <br></br>
+                    <h3>Select what you'd like to view</h3>
+                    <br></br>
+                    <label for='message_box'>Message</label> <input type="checkbox" id="message_box" />
+                    <br></br>
+                    <label for='customer_name'></label>Customer Name<input type="checkbox" id="customer_name" />
+                    <br></br>
+                    <label for='customer_email'>Customer Email</label> <input type="checkbox" id="customer_email" />
+                    <br></br>
+                    <label for='customer_phone'>Customer Phone</label> <input type="checkbox" id="customer_phone" />
+                    <br></br>
+                    <label for='date_box'></label>Date<input type="checkbox" id="date_box" id="ON" />
+                    <br></br>
+
+                    <button class="btn btn-info realtorLogin" value="Login"/>Submit</button>                    
+
+                    <div id="messages_table" class="table table-striped"> 
+
+
+                    </div>
+
+
                 </div>
                 <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
                     <div class="panel panel-default">
@@ -137,6 +169,7 @@
 </html>
 
 <script type="text/javascript">
+    var realtorID;
     $(function () {
         var html = '';
         $(".aggregateButton").on("click", function () {
@@ -149,5 +182,47 @@
                 $(".aggregateTable").append('<tr><td>"${sqlMinAggregate.rowsByIndex[0][0]}"</td></tr>');
             }
         });
+        $(".realtorLogin").on("click", function () {
+            realtorID = $(".realtor_id").val();
+
+            var messageChecked = $("#message_box").is(":checked");
+            var cNameChecked = $("#customer_name").is(":checked");
+            var cEmailChecked = $("#customer_email").is(":checked");
+            var cPhoneChecked = $("#customer_phone").is(":checked");
+            var dateChecked = $("#date_box").is(":checked");
+
+            var url = [location.protocol, '//', location.host, "/RentalSite/realtor/message.jsp?"].join('');
+            var uriParams = {
+                "realtor_id": realtorID,
+                "message_checked": messageChecked,
+                "name_checked": cNameChecked,
+                "email_checked": cEmailChecked,
+                "phone_checked": cPhoneChecked,
+                "date_checked": dateChecked
+            }
+
+            var uri = Object.keys(uriParams).map(key => {
+                return [key, uriParams[key]].map(encodeURIComponent).join("=");
+            }).join("&");
+
+            $.ajax(url + uri, {
+                success: result => {
+                    $("#messages_table").empty();
+                    $("#messages_table").append(result);
+                    $("#messages_table > table").addClass("table table-hover");
+                    console.log(result);
+                },
+                error: err => {
+                    alert("Sorry, the ID is invalid");
+                    console.log(err);
+                }
+            });
+        })
     });
 </script>
+
+
+
+
+
+

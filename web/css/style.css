@@ -84,6 +84,21 @@ and open the template in the editor.
   margin-top: -25%;
   margin-bottom: -25%;
 }
+.side-nav {
+  position: sticky;
+  top: 56px;
+  height: calc(100vh - 56px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.side-nav .nav-link {
+  color: #333;
+  font-weight: 500;
+}
+.side-nav .nav-link.active {
+  color: #007bff;
+}
 .upside-down-nav .nav-tabs {
   border-bottom: 0;
   border-top: 1px solid #dee2e6;

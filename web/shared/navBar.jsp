@@ -24,7 +24,7 @@
 <html>
     <head>
         
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
         <ul class="navbar-nav" id="nav">
           <li class="nav-item">
             <a class="nav-link" href="/RentalSite">Home</a>

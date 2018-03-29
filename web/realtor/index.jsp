@@ -2,7 +2,7 @@
 <jsp:include page="/shared/navBar.jsp" />
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <sql:query var="sqlMaxAggregate" dataSource="jdbc/RentalSite">
     SELECT MAX(AvgPrices.avg_price) AS max_avg_price
@@ -41,7 +41,7 @@
 </sql:query>
 
 <sql:query var="messagesQuery" dataSource="jdbc/RentalSite">
-    SELECT * FROM CustomerContactRealtor 
+    SELECT * FROM CustomerContactRealtor
     WHERE realtor_id = YEAR(CURDATE());
 </sql:query>
 
@@ -97,9 +97,9 @@
                     <label for='date_box'></label>Date<input type="checkbox" id="date_box" id="ON" />
                     <br></br>
 
-                    <button class="btn btn-info realtorLogin" value="Login"/>Submit</button>                    
+                    <button class="btn btn-info realtorLogin" value="Login"/>Submit</button>
 
-                    <div id="messages_table" class="table table-striped"> 
+                    <div id="messages_table" class="table table-striped">
 
 
                     </div>
@@ -212,10 +212,10 @@
                     $("#messages_table > table").addClass("table table-hover");
                     console.log(result);
                 },
-                error: err => {
-                    alert("Sorry, the ID is invalid");
-                    console.log(err);
-                }
+//                error: err => {
+//                    alert("Sorry, the ID is invalid");
+//                    console.log(err);
+//                }
             });
         })
     });

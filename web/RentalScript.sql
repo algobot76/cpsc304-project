@@ -27,7 +27,8 @@ VALUES ('V5L 3X8', 'Vancouver', 'BC'), ('V6E 1A3', 'Vancouver', 'BC'), ('V6K 1N9
   ('V6S 1A5', 'Vancouver', 'BC'), ('V6T 1W6', 'Vancouver', 'BC'), ('V6Z 2T7', 'Vancouver', 'BC'),
   ('V6L 3B4', 'Vancouver', 'BC'), ('V5L 1K3', 'Vancouver', 'BC'), ('V6N 1N3', 'Vancouver', 'BC'),
   ('V6T 1Z4', 'Vancouver', 'BC'), ('M9B 4T1', 'Toronto', 'ON'), ('M5V 2G3', 'Toronto', 'ON'),
-  ('L9G 4K9', 'Hamilton', 'ON'), ('L8V 1S1', 'Hamilton', 'ON'), ('H2G 3G7', 'Montreal', 'QC');
+  ('L9G 4K9', 'Hamilton', 'ON'), ('L8V 1S1', 'Hamilton', 'ON'), ('H2G 3G7', 'Montreal', 'QC'),
+  ('T5G 0Z7', 'Edmonton', 'AB');
 
 
 CREATE TABLE Customer (
@@ -77,7 +78,8 @@ CREATE TABLE Realtor (
 INSERT INTO Realtor VALUES ('6135550192', 'MarkRWilson@teleworm.us', 'Mark R. Wilson', '1', '1'),
   ('603161977', 'ElliotEForbes@jourrapide.com', 'Elliot E. Forbes', '2', '2'),
   ('9058885623', 'ScottCSigler@armyspy.com', 'Scott C. Sigler', '3', '3'),
-  ('9057923111', 'IanBDurham@teleworm.us ', 'Ian B. Durham', '4', '4');
+  ('9057923111', 'IanBDurham@teleworm.us ', 'Ian B. Durham', '4', '4'),
+  ('8679697979', 'TimothyLSutton@armyspy.com ', 'Timothy L. Sutton', '5', '5');
 
 
 CREATE TABLE Property (
@@ -122,7 +124,8 @@ VALUES ('1', '1', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2
   ('9', '4', 'L9G 4K9', 'House', '2013-01-02', 2800, '2016-09-08', 4, 4.5, '46 Abbey Clse',
         'https://d3ljd161w9lywl.cloudfront.net/property/image/X4080134/46-abbey-clse-hamilton-on-9587_X4080134-1938890-0_lightbox.jpg'),
   ('10', '4', 'L8V 1S1', 'House', '2014-05-14', 1100, '2016-01-10', 2, 2.5, '783 E Brucedale Avenue',
-         'https://d3ljd161w9lywl.cloudfront.net/property/image/X4079304/783-e-brucedale-avenue-hamilton-on-2528_X4079304-1937790-0_lightbox.jpg');
+         'https://d3ljd161w9lywl.cloudfront.net/property/image/X4079304/783-e-brucedale-avenue-hamilton-on-2528_X4079304-1937790-0_lightbox.jpg'),
+  ('11', '5', 'T5G 0Z7', 'Townhouse', '1998-09-10', 1045, '2017-10-15', 3, 4, '11524 92 Street, Alberta Avenue', 'https://db2cf77a39fa4a7ab1e8-5466068bb220d5bba245b01d4336f35d.ssl.cf5.rackcdn.com/e4102666-condo-townhouse-1e0x7uj-l.jpg');
 
 
 CREATE TABLE ForSale (
@@ -135,7 +138,7 @@ CREATE TABLE ForSale (
 );
 
 INSERT INTO ForSale
-VALUES ('4', 3400000), ('7', 635800), ('8', 300000);
+VALUES ('4', 3400000), ('7', 635800), ('8', 300000), ('11', 15000000);
 
 CREATE TABLE ForRent (
   property_id CHAR(10),
@@ -242,7 +245,11 @@ VALUES ('Kitchen', '1',
   ('Master Kitchen', '10',
    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC3cjSZ5o01ejW0n83FpfrzKM4Ngi-GS6hScNaGg2x6iHNUN_8'),
   ('Master Washroom', '10',
-   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRimIP3qIkC4utrI0UX-UYWzO-fkhvCOHzgD31EaXvH1EpyAxmVPA');
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRimIP3qIkC4utrI0UX-UYWzO-fkhvCOHzgD31EaXvH1EpyAxmVPA'),
+  ('Master Kitchen', '11',
+   'https://db2cf77a39fa4a7ab1e8-5466068bb220d5bba245b01d4336f35d.ssl.cf5.rackcdn.com/e4102666-condo-townhouse-1ee3lzw-l.jpg'),
+  ('Master Washroom', '11',
+   'https://db2cf77a39fa4a7ab1e8-5466068bb220d5bba245b01d4336f35d.ssl.cf5.rackcdn.com/e4102666-condo-townhouse-18evoe-l.jpg');
 
 CREATE TABLE CustomerContactRealtor (
   message_id      INT AUTO_INCREMENT,

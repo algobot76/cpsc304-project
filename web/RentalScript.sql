@@ -74,9 +74,9 @@ CREATE TABLE Realtor (
     ON DELETE CASCADE
 );
 
-INSERT INTO Realtor VALUES ('6135550192', 'MarkRWilson@teleworm.us', 'Mark R. Wilson', '12345', '1'),
-  ('603161977', 'ElliotEForbes@jourrapide.com', 'Elliot E. Forbes', '12346', '2'),
-  ('9058885623', 'ScottCSigler@armyspy.com', 'Scott C. Sigler', '12347', '3');
+INSERT INTO Realtor VALUES ('6135550192', 'MarkRWilson@teleworm.us', 'Mark R. Wilson', '1', '1'),
+  ('603161977', 'ElliotEForbes@jourrapide.com', 'Elliot E. Forbes', '2', '2'),
+  ('9058885623', 'ScottCSigler@armyspy.com', 'Scott C. Sigler', '3', '3');
 
 
 CREATE TABLE Property (
@@ -102,21 +102,21 @@ CREATE TABLE Property (
 
 
 INSERT INTO Property
-VALUES ('1', '12345', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2, '1A-139 Drake Street',
+VALUES ('1', '1', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2, '1A-139 Drake Street',
              'http://www.hpuriageplus.com/wp-content/uploads/2017/07/the-kelvin-apartments-exterior.jpg'),
-  ('2', '12345', 'V6L 3B4', 'Apt/Condo', '1974-09-12', 1316, '2013-12-13', 2, 2, '409-2101 Mcmullen Avenue',
+  ('2', '1', 'V6L 3B4', 'Apt/Condo', '1974-09-12', 1316, '2013-12-13', 2, 2, '409-2101 Mcmullen Avenue',
         'https://ar.rdcpix.com/1039039409/04b26a2e47defab576081f6b4a529302c-f0xd-w1020_h770_q80.jpg'),
-  ('3', '12346', 'V5L 1K3', 'Townhouse', '2018-05-29', 1468, '2014-08-29', 3, 3, '2036 Franklin Street',
+  ('3', '2', 'V5L 1K3', 'Townhouse', '2018-05-29', 1468, '2014-08-29', 3, 3, '2036 Franklin Street',
         'https://na.rdcpix.com/90885237/8ecb8b5c10a19ccbe1daba7bc38ec77cw-c303855xd-w685_h860_q80.jpg'),
-  ('4', '12347', 'V6N 1N3', 'House', '2016-12-10', 4132, '2018-01-03', 6, 6, '4928 Blenheim Street',
+  ('4', '3', 'V6N 1N3', 'House', '2016-12-10', 4132, '2018-01-03', 6, 6, '4928 Blenheim Street',
         'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'),
-  ('5', '12347', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street',
+  ('5', '3', 'V5L 1K3', 'Townhouse', '1998-07-31', 1445, '2015-07-29', 3, 3, '2034 Franklin Street',
         'http://www.vanrealty.ca/images/metrotown-townhouse_500.jpg'),
-  ('6', '12347', 'M9B 4T1', 'House', '2018-09-30', '2550', '2018-12-12', 4, 4.5, '95B Laurel Avenue',
+  ('6', '3', 'M9B 4T1', 'House', '2018-09-30', '2550', '2018-12-12', 4, 4.5, '95B Laurel Avenue',
         'http://php4net.com/wp-content/uploads/2018/02/house-59952-b600.jpg'),
-  ('7', '12346', 'M5V 2G3', 'Apt/Condo', '2017-03-08', 600, '2018-01-01', 1, 1, '1302-88 Blue Jays Way',
+  ('7', '2', 'M5V 2G3', 'Apt/Condo', '2017-03-08', 600, '2018-01-01', 1, 1, '1302-88 Blue Jays Way',
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Haf64iVMQMm9LZ90VspE2brvf_dEPvimku225pUDuVQ8RhcO'),
-  ('8', '12346', 'H2G 3G7', 'Apt/Condo', '1990-11-08', 179, '2013-11-09', 0, 1, '213-5850 Av. Papineau',
+  ('8', '2', 'H2G 3G7', 'Apt/Condo', '1990-11-08', 179, '2013-11-09', 0, 1, '213-5850 Av. Papineau',
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHAg3SRiyp93l-Ek2iUDE_YHk7GLVEDQ5RrCyQzjDF1ZIhmM8');
 
 
@@ -248,17 +248,17 @@ CREATE TABLE CustomerContactRealtor (
 );
 
 INSERT INTO CustomerContactRealtor (customer_id, realtor_id, date, contact_message)
-VALUES (1, '12345', '2017-04-08 00:00:00',
+VALUES (1, '1', '2017-04-08 00:00:00',
         'Be me shall purse my ought times. Joy years doors all would again rooms these. Solicitude announcing as to sufficient my. No my reached suppose proceed pressed perhaps he. Eagerness it delighted prono'),
-  (2, '12345', '2018-01-02 00:00:00',
+  (2, '1', '2018-01-02 00:00:00',
    'Started several mistake joy say painful removed reached end. State burst think end are its. Arrived off she elderly beloved him affixed noisier yet. An course regard to up he hardly. View four has sai'),
-  (3, '12346', '2018-03-12 00:00:00',
+  (3, '2', '2018-03-12 00:00:00',
    'Doubtful two bed way pleasure confined followed. Shew up ye away no eyes life or were this. Perfectly did suspicion daughters but his intention. Started on society an brought it explain. Position two'),
-  (4, '12347', '2016-08-01 00:00:00',
+  (4, '3', '2016-08-01 00:00:00',
    '\nAttachment apartments in delightful by motionless it no. And now she burst sir learn total. Hearing hearted shewing own ask. Solicitude uncommonly use her motionless not collecting age. The properly'),
-  (4, '12345', '2017-09-01 00:00:00',
+  (4, '1', '2017-09-01 00:00:00',
    'Luckily friends do ashamed to do suppose. Tried meant mr smile so. Exquisite behaviour as to middleton perfectly. Chicken no wishing waiting am. Say concerns dwelling graceful six humoured. Whether mr'),
-  (4, '12346', '2018-04-13 00:00:00',
+  (4, '2', '2018-04-13 00:00:00',
    'Real sold my in call. Invitation on an advantages collecting. But event old above shy bed noisy. Had sister see wooded favour income has. Stuff rapid since do as hence. Too insisted ignorant procured');
 
 DELIMITER $$

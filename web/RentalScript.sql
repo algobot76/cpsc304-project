@@ -27,7 +27,7 @@ VALUES ('V5L 3X8', 'Vancouver', 'BC'), ('V6E 1A3', 'Vancouver', 'BC'), ('V6K 1N9
   ('V6S 1A5', 'Vancouver', 'BC'), ('V6T 1W6', 'Vancouver', 'BC'), ('V6Z 2T7', 'Vancouver', 'BC'),
   ('V6L 3B4', 'Vancouver', 'BC'), ('V5L 1K3', 'Vancouver', 'BC'), ('V6N 1N3', 'Vancouver', 'BC'),
   ('V6T 1Z4', 'Vancouver', 'BC'), ('M9B 4T1', 'Toronto', 'ON'), ('M5V 2G3', 'Toronto', 'ON'),
-  ('H2G 3G7', 'Montreal', 'QC');
+  ('L9G 4K9', 'Hamilton', 'ON'), ('L8V 1S1', 'Hamilton', 'ON'), ('H2G 3G7', 'Montreal', 'QC');
 
 
 CREATE TABLE Customer (
@@ -76,7 +76,8 @@ CREATE TABLE Realtor (
 
 INSERT INTO Realtor VALUES ('6135550192', 'MarkRWilson@teleworm.us', 'Mark R. Wilson', '1', '1'),
   ('603161977', 'ElliotEForbes@jourrapide.com', 'Elliot E. Forbes', '2', '2'),
-  ('9058885623', 'ScottCSigler@armyspy.com', 'Scott C. Sigler', '3', '3');
+  ('9058885623', 'ScottCSigler@armyspy.com', 'Scott C. Sigler', '3', '3'),
+  ('9057923111', 'IanBDurham@teleworm.us ', 'Ian B. Durham', '4', '4');
 
 
 CREATE TABLE Property (
@@ -117,7 +118,11 @@ VALUES ('1', '1', 'V6Z 2T7', 'Apt/Condo', '1996-04-21', 1100, '2016-05-01', 2, 2
   ('7', '2', 'M5V 2G3', 'Apt/Condo', '2017-03-08', 600, '2018-01-01', 1, 1, '1302-88 Blue Jays Way',
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8Haf64iVMQMm9LZ90VspE2brvf_dEPvimku225pUDuVQ8RhcO'),
   ('8', '2', 'H2G 3G7', 'Apt/Condo', '1990-11-08', 179, '2013-11-09', 0, 1, '213-5850 Av. Papineau',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHAg3SRiyp93l-Ek2iUDE_YHk7GLVEDQ5RrCyQzjDF1ZIhmM8');
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfHAg3SRiyp93l-Ek2iUDE_YHk7GLVEDQ5RrCyQzjDF1ZIhmM8'),
+  ('9', '4', 'L9G 4K9', 'House', '2013-01-02', 2800, '2016-09-08', 4, 4.5, '46 Abbey Clse',
+        'https://d3ljd161w9lywl.cloudfront.net/property/image/X4080134/46-abbey-clse-hamilton-on-9587_X4080134-1938890-0_lightbox.jpg'),
+  ('10', '4', 'L8V 1S1', 'House', '2014-05-14', 1100, '2016-01-10', 2, 2.5, '783 E Brucedale Avenue',
+         'https://d3ljd161w9lywl.cloudfront.net/property/image/X4079304/783-e-brucedale-avenue-hamilton-on-2528_X4079304-1937790-0_lightbox.jpg');
 
 
 CREATE TABLE ForSale (
@@ -140,7 +145,8 @@ CREATE TABLE ForRent (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
-INSERT INTO ForRent VALUES (1, 3000);
+INSERT INTO ForRent
+VALUES ('1', 3000), ('9', 4500), ('10', 4900);
 
 CREATE TABLE Sold (
   property_id CHAR(10),
@@ -230,7 +236,13 @@ VALUES ('Kitchen', '1',
   ('Master Kitchen', '8',
    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4F8gQ_fhK9cGCwF58a2E5s0yfd8Y5C3wHuuR_e2XHol0GebNm'),
   ('Master Washroom', '8',
-   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Z4Dwp0EzZ0xRXZq0QmTqLAGZirDi8BnfVfh-l6Ljo74JHz6U');
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-Z4Dwp0EzZ0xRXZq0QmTqLAGZirDi8BnfVfh-l6Ljo74JHz6U'),
+  ('Master Kitchen', '9', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1gEc9Qrs_fu4pD5cKoHUy8cfbGFLzX6U1X2SlyqSboxNEddieLg'),
+  ('Master Washroom', '9', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGKe3pDcqtT0CaGlk0UFVYwI97vMhJX3UiBJKKR7Yc7FwEkN2S'),
+  ('Master Kitchen', '10',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTC3cjSZ5o01ejW0n83FpfrzKM4Ngi-GS6hScNaGg2x6iHNUN_8'),
+  ('Master Washroom', '10',
+   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRimIP3qIkC4utrI0UX-UYWzO-fkhvCOHzgD31EaXvH1EpyAxmVPA');
 
 CREATE TABLE CustomerContactRealtor (
   message_id      INT AUTO_INCREMENT,

@@ -225,11 +225,12 @@ VALUES ('Kitchen', '1',
    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY--XHEe0PUsgh4PFKNYWKIivRcBa7LOIfG1cL2k_UkrmZL_QnxA');
 
 CREATE TABLE CustomerContactRealtor (
+  message_id INT AUTO_INCREMENT,
   customer_id     INT,
   realtor_id      CHAR(10),
   date            DATE,
   contact_message CHAR(200),
-  PRIMARY KEY (customer_id, realtor_id),
+  PRIMARY KEY (message_id),
   FOREIGN KEY (customer_id) REFERENCES Customer (customer_id)
     ON UPDATE CASCADE
     ON DELETE NO ACTION,
@@ -238,7 +239,8 @@ CREATE TABLE CustomerContactRealtor (
     ON DELETE NO ACTION
 );
 
-INSERT INTO CustomerContactRealtor VALUES (1, '12345', '2017-04-08 00:00:00',
+INSERT INTO CustomerContactRealtor (customer_id, realtor_id, date, contact_message)
+VALUES (1, '12345', '2017-04-08 00:00:00',
                                            'Be me shall purse my ought times. Joy years doors all would again rooms these. Solicitude announcing as to sufficient my. No my reached suppose proceed pressed perhaps he. Eagerness it delighted prono'),
   (2, '12345', '2018-01-02 00:00:00',
    'Started several mistake joy say painful removed reached end. State burst think end are its. Arrived off she elderly beloved him affixed noisier yet. An course regard to up he hardly. View four has sai'),

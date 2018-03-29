@@ -40,6 +40,12 @@
     WHERE YEAR(date_sold) = YEAR(CURDATE());
 </sql:query>
 
+<sql:query var="messagesQuery" dataSource="jdbc/RentalSite">
+    SELECT * FROM CustomerContactRealtor 
+    WHERE realtor_id = YEAR(CURDATE());
+</sql:query>
+
+
 <c:set var="maxAggregateDetails" value="${sqlMaxAggregate.rows[0]}"/>
 <c:set var="minAggregateDetails" value="${sqlMinAggregate.rows[0]}"/>
 <%--<c:set var="divisionDetails" value="${divisionQuery.rows[0]}"/>
@@ -79,7 +85,28 @@
                             </jsp:include>
                         </div>
                         <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab">
-                            Messages go here
+                            <h2>View Messages</h2>
+                            <br></br>
+                            <strong>Enter your ID</strong>
+                            <input class="realtor_id" type="text" name="realtor_id" value="" />
+                            <br></br>
+                            <h3>Select what you'd like to view</h3>
+                            <br></br>
+                            <label for='message_box'>Message</label> <input type="checkbox" id="message_box" />
+                            <br></br>
+                            <label for='customer_name'></label>Customer Name<input type="checkbox" id="customer_name" />
+                            <br></br>
+                            <label for='customer_email'>Customer Email</label> <input type="checkbox" id="customer_email" />
+                            <br></br>
+                            <label for='customer_phone'>Customer Phone</label> <input type="checkbox" id="customer_phone" />
+                            <br></br>
+                            <label for='date_box'></label>Date<input type="checkbox" id="date_box" id="ON" />
+                            <br></br>
+
+                            <button class="btn btn-info realtorLogin" value="Login"/>Submit</button>                    
+
+                            <div id="messages_table" class="table table-striped"> 
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
                             <div class="card">

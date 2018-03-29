@@ -112,4 +112,16 @@ and open the template in the editor.
 .realtorContactInfo .realtor-contact-form .submit-button {
   margin-top: 10px;
 }
+.masthead {
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  background: url(../img/false_creek.jpg) no-repeat center center scroll;
+  background-size: cover;
+}
+.masthead .title-page-body {
+  background: transparent;
+  color: white;
+}
 /*# sourceMappingURL=style.css.map */

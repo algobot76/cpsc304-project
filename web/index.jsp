@@ -19,8 +19,14 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
     </head>
     <body>
-        <div>
-            Home page for now
+        <div class="masthead">
+            <div class="jumbotron title-page-body">
+                <h1 class="display-4">There's no place like home</h1>
+                <p>Find your dream house today</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="${pageContext.request.contextPath}/customer" role="button">Learn more</a>
+                </p>
+            </div>
         </div>
     </body>
 </html>

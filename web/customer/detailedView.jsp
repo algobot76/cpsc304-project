@@ -173,8 +173,7 @@
                         <h2>$${propertyDetails.price}</h2>
                     </div>
 
-                    <div class="propertyDescription">
-                        TODO
+                    <div class="propertyDescriptionFeatures">
                     </div>
 
                     <div class="realtorContactInfo">

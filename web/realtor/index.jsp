@@ -1,5 +1,4 @@
 <%@taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
-<jsp:include page="/shared/navBar.jsp" />
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -59,9 +58,10 @@
         <title>Rental Site</title>
     </head>
     <body>
-        <div class="container-fluid">
+        <jsp:include page="/shared/navBar.jsp" />
+        <div class="container-fluid realtor-page">
             <div class="row">
-                <nav class="col-md-2 d-none d-md-block bg-light">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="side-nav">
                         <ul class="nav flex-column" id="realtor-tabs" role="tablist">
                             <li class="nav-item">

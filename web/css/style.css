@@ -84,7 +84,16 @@ and open the template in the editor.
   margin-top: -25%;
   margin-bottom: -25%;
 }
-.side-nav {
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  padding: 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+.sidebar .side-nav {
   position: sticky;
   top: 56px;
   height: calc(100vh - 56px);
@@ -92,12 +101,17 @@ and open the template in the editor.
   overflow-x: hidden;
   overflow-y: auto;
 }
-.side-nav .nav-link {
+.sidebar .side-nav .nav-link {
   color: #333;
   font-weight: 500;
 }
-.side-nav .nav-link.active {
+.sidebar .side-nav .nav-link.active {
   color: #007bff;
+}
+.realtor-page .content #messages_table table {
+  table-layout: fixed;
+  overflow: auto;
+  word-wrap: break-word;
 }
 .upside-down-nav .nav-tabs {
   border-bottom: 0;

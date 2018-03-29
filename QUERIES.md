@@ -21,7 +21,6 @@
       - [Using `MAX()`](#using-max)
       - [Using `MIN()`](#using-min)
   - [Queries for Reports](#queries-for-reports)
-    - [Find the total number of sales this year](#find-the-total-number-of-sales-this-year)
 
 ## Queries for Updating Tables
 
@@ -148,5 +147,4 @@ FROM (SELECT AVG(S.price) AS avg_price
 ```
 
 ## Queries for Reports
-
-### Find the total number of sales this year
+###

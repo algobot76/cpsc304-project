@@ -9,6 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBuqQSkoLK_yz9xEqNR5y2W6zsIdhlrygg"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js" integrity="sha256-JG6hsuMjFnQ2spWq0UiaDRJBaarzhFbUxiUTxQDA9Lk=" crossorigin="anonymous"></script>
 
 <sql:query var="sqlMaxAggregate" dataSource="jdbc/RentalSite">
     SELECT MAX(AvgPrices.avg_price) AS max_avg_price
@@ -42,6 +43,14 @@
     SELECT COUNT(property_id) AS num_properties
     FROM RentalDatabase.Sold
     WHERE YEAR(date_sold) = YEAR(CURDATE());
+</sql:query>
+
+<sql:query var="avgPriceByProvince" dataSource="jdbc/RentalSite">
+    select AvgPrices.avg_price, AvgPrices.province 
+    from (select AVG(S.price) as avg_price, 
+    PC.province as province from Property P, ForSale S, PostalCode PC 
+    where S.property_id=P.property_id AND P.postal_code=PC.postal_code 
+    GROUP BY PC.province) as AvgPrices;
 </sql:query>
 
 <sql:query var="messagesQuery" dataSource="jdbc/RentalSite">
@@ -200,6 +209,20 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingFour">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                                Average property price by province
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+                                        <div class="card-body" style="overflow:auto">
+                                            <canvas id="myChart" width="100%" height="40%"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -258,7 +281,43 @@
 //                    console.log(err);
 //                }
             });
-        })
+        });
+        var price = [
+    <c:forEach var="responseString" items = "${avgPriceByProvince.rows}">
+        <c:out value="${responseString.avg_price}" />,
+    </c:forEach>
+        ];
+
+        var labels = [
+    <c:forEach var="responseString" items = "${avgPriceByProvince.rows}">
+            '<c:out value="${responseString.province}" />',
+    </c:forEach>
+        ];
+
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                        label: "Average Property Price",
+                        data: price,
+                        "fill":false,
+                        "backgroundColor":["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)"],
+                        "borderColor":["rgb(255, 99, 132)","rgb(255, 159, 64)","rgb(255, 205, 86)","rgb(75, 192, 192)","rgb(54, 162, 235)","rgb(153, 102, 255)","rgb(201, 203, 207)"],
+                        "borderWidth":1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                }
+            }
+        });
     });
 
     function fnExcelReport() {

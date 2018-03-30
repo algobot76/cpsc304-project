@@ -90,7 +90,7 @@ WHERE property_id = '6';
 ### Delete a property
 
 ```sql
- DELETE FROM Property
+DELETE FROM Property
 WHERE Property.property_id = '2';
 ```
 

@@ -168,3 +168,15 @@ WHERE YEAR(date_sold) = YEAR(CURDATE());
 ```
 
 ### Find the average price of `ForSale` properties in each province
+
+```sql
+SELECT
+  AvgPrices.avg_price,
+  AvgPrices.province
+FROM (SELECT
+        AVG(S.price) AS avg_price,
+        PC.province  AS province
+      FROM Property P, ForSale S, PostalCode PC
+      WHERE S.property_id = P.property_id AND P.postal_code = PC.postal_code
+      GROUP BY PC.province) AS AvgPrices;
+```

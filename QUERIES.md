@@ -9,6 +9,7 @@
     - [Update the info of a specific property](#update-the-info-of-a-specific-property)
     - [Get the `Room` info of a specific property](#get-the-room-info-of-a-specific-property)
     - [Update the prince in `ForSale` or `ForRent` table](#update-the-prince-in-forsale-or-forrent-table)
+    - [Delete a property](#delete-a-property)
     - [Get the contact messages and related customer info for a specific realtor](#get-the-contact-messages-and-related-customer-info-for-a-specific-realtor)
   - [Division Query](#division-query)
     - [Find the customers who has contacted all the realtors](#find-the-customers-who-has-contacted-all-the-realtors)
@@ -85,6 +86,15 @@ UPDATE ForRent
 SET price = 5000
 WHERE property_id = '6';
 ```
+
+### Delete a property
+
+```sql
+ DELETE FROM Property
+WHERE Property.property_id = '2';
+```
+
+NOTE: This SQL statement deletes an entry from the `Property` table  and also deletes the corresponding entry from the `ForSale`, `ForRent`, `Sold`, or `Rented` table.
 
 ### Get the contact messages and related customer info for a specific realtor
 

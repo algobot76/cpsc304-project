@@ -1,18 +1,15 @@
 # Queries
 
 - [Queries](#queries)
-  - [Queries for Updating Tables](#queries-for-updating-tables)
-    - [Add entries](#add-entries)
-      - [Add a new entry into `Property` table](#add-a-new-entry-into-property-table)
-      - [Add a new entry into `ForRent` table](#add-a-new-entry-into-forrent-table)
-      - [Add a new entry into `ForSale` table](#add-a-new-entry-into-forsale-table)
-      - [Add a new entry into `Sold` table](#add-a-new-entry-into-sold-table)
-      - [Add a new entry into `Rented` table](#add-a-new-entry-into-rented-table)
-      - [Add a new entry into `Feature` table](#add-a-new-entry-into-feature-table)
-      - [Add a new entry into `Room` table](#add-a-new-entry-into-room-table)
-      - [Update the info of an customer with an existing email address](#update-the-info-of-an-customer-with-an-existing-email-address)
-    - [Delete entries](#delete-entries)
-      - [Delete an entry from `Property` table](#delete-an-entry-from-property-table)
+  - [Queries for Customers](#queries-for-customers)
+    - [Search `ForSale` or `ForRent` properties](#search-forsale-or-forrent-properties)
+    - [Get the contact info of the realtor of a specific property](#get-the-contact-info-of-the-realtor-of-a-specific-property)
+  - [Queries for Realtors](#queries-for-realtors)
+    - [Get the info of a specific `ForSale` or `ForRent` properties](#get-the-info-of-a-specific-forsale-or-forrent-properties)
+    - [Update the info of a specific property](#update-the-info-of-a-specific-property)
+    - [Get the `Room` info of a specific property](#get-the-room-info-of-a-specific-property)
+    - [Update the prince in `ForSale` or `ForRent` table](#update-the-prince-in-forsale-or-forrent-table)
+    - [Get the contact messages and related customer info for a specific realtor](#get-the-contact-messages-and-related-customer-info-for-a-specific-realtor)
   - [Division Query](#division-query)
     - [Find the customers who has contacted all the realtors](#find-the-customers-who-has-contacted-all-the-realtors)
   - [Aggregation Query](#aggregation-query)
@@ -24,82 +21,78 @@
   - [Queries for Reports](#queries-for-reports)
     - [Find the total number of sales this year](#find-the-total-number-of-sales-this-year)
     - [Find the average price of `ForSale` properties in each province](#find-the-average-price-of-forsale-properties-in-each-province)
+- [Triggers](#triggers)
+  - [Check if the customer enters a valid email address](#check-if-the-customer-enters-a-valid-email-address)
 
-## Queries for Updating Tables
+## Queries for Customers
 
-### Add entries
-
-#### Add a new entry into `Property` table
-
-```sql
-INSERT INTO PostalCode
-VALUES ('M2R 2Z1', 'Toronto', 'ON');
-
-INSERT INTO Property
-(property_id, realtor_id, postal_code, property_type, date_built, sq_ft, date_added, num_beds, num_baths, address)
-VALUES ('6', '12345', 'M2R 2Z1', 'Apt/Condo', '1990-07-29', 999, '2014-03-01', 1, 1, '305-135 Antibes Drive');
-```
-
-#### Add a new entry into `ForRent` table
+### Search `ForSale` or `ForRent` properties
 
 ```sql
-INSERT INTO ForRent
-VALUES ('6', 1250);
+SELECT Property.*, PostalCode.*, ForRent.price
+FROM Property, PostalCode, ForRent
+WHERE Property.postal_code = PostalCode.postal_code
+AND ForRent.property_id = Property.property_id
+AND ForRent.price BETWEEN 1 AND 5000
+AND Property.sq_ft BETWEEN 1 AND 1500;
 ```
 
-#### Add a new entry into `ForSale` table
+### Get the contact info of the realtor of a specific property
 
 ```sql
-INSERT INTO ForSale
-VALUES('3','4500000');
+SELECT R.*, O.* FROM Realtor R
+INNER JOIN Property P ON R.realtor_id = P.realtor_id
+INNER JOIN RealtyOffice O ON R.branch_id = O.branch_id
+WHERE P.property_id = '3';
 ```
 
-#### Add a new entry into `Sold` table
+## Queries for Realtors
+
+### Get the info of a specific `ForSale` or `ForRent` properties
 
 ```sql
-INSERT INTO Sold
-VALUES('1', '23456800','2012-03-07','4');
+SELECT Property.*, PostalCode.*, ForRent.price
+FROM Property, PostalCode, ForRent
+WHERE Property.postal_code = PostalCode.postal_code
+AND ForRent.property_id = Property.property_id
+AND property_id = 3
 ```
 
-#### Add a new entry into `Rented` table
+### Update the info of a specific property
 
 ```sql
-INSERT INTO Sold
-VALUES('7', '54456000','2013-03-07','5');
+UPDATE Property p
+SET
+p.sq_ft = 2300,
+p.num_beds = 4,
+p.num_baths = 5.5,
+WHERE p.property_id = '3';
 ```
 
-#### Add a new entry into `Feature` table
+### Get the `Room` info of a specific property
 
 ```sql
-INSERT INTO Feature
-VALUES('half furnished', 'The whole house/apt\r half furnished', '2');
+SELECT Room.*
+FROM INNER JOIN Property
+ON Property.property_id = Room.property_id
+WHERE Property.property_id = '3';
 ```
 
-#### Add a new entry into `Room` table
+### Update the prince in `ForSale` or `ForRent` table
 
 ```sql
-INSERT INTO Room
-VALUES ('Kitchen', '6', 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhIWFRU')
+UPDATE ForRent
+SET price = 5000
+WHERE property_id = '6';
 ```
 
-#### Update the info of an customer with an existing email address
+### Get the contact messages and related customer info for a specific realtor
 
 ```sql
-INSERT INTO Customer (email, phone, name)
-VALUES ('YongHsiung@dayrep.com', '1234', 'foo')
-ON DUPLICATE KEY UPDATE phone = '1234', name = 'foo';
+SELECT CCR.contact_message, C.name, C.email, C.phone, CCR.date
+FROM CustomerContactRealtor CCR, Customer C
+WHERE CCR.customer_id = C.customer_id AND CCR.realtor_id = '2';
 ```
-
-### Delete entries
-
-#### Delete an entry from `Property` table
-
-```sql
-DELETE FROM Property
-WHERE property_id = '3';
-```
-
-Any SQL statement that deletes an entry from the `Property` table will also delete the corresponding entry from  the `ForSale`, `ForRent`, `Sold`, or `Rented` table.
 
 ## Division Query
 
@@ -179,4 +172,25 @@ FROM (SELECT
       FROM Property P, ForSale S, PostalCode PC
       WHERE S.property_id = P.property_id AND P.postal_code = PC.postal_code
       GROUP BY PC.province) AS AvgPrices;
+```
+
+# Triggers
+
+## Check if the customer enters a valid email address
+
+```sql
+DELIMITER $$
+CREATE TRIGGER email_before_insert
+  BEFORE INSERT
+  ON Customer
+  FOR EACH ROW
+  BEGIN
+    IF new.email NOT REGEXP '^[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$'
+    THEN
+      SIGNAL SQLSTATE '45000'
+      SET MESSAGE_TEXT = 'Email is invalid!';
+    END IF;
+  END $$
+DELIMITER ;
+
 ```

@@ -97,7 +97,6 @@
 
         var $form = $(".realtor-update-delete-form");
         $form.on("submit", function (event) {
-            debugger;
             var isValid = $form[0].checkValidity()
             if (isValid === false) {
                 event.preventDefault();
@@ -144,7 +143,7 @@
 
                         <div class="form-group">
                             <label for="address_input">Address</label>
-                            <input class="form-control" type="text" id="address_input" value="${propertyDetails.address}" required/>
+                            <input class="form-control" type="text" id="address_input" value="${propertyDetails.address}" required disabled/>
                         </div>
 
                         <div class="form-group">

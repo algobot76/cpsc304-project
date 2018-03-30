@@ -63,8 +63,6 @@
                 return [key, uriParams[key]].map(encodeURIComponent).join("=");
             }).join("&");
 
-
-            debugger;
             // navigate to this path
             window.location.href = url + uri;
         }

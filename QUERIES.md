@@ -23,6 +23,7 @@
       - [Using `MIN()`](#using-min)
   - [Queries for Reports](#queries-for-reports)
     - [Find the total number of sales this year](#find-the-total-number-of-sales-this-year)
+    - [Find the average price of `ForSale` properties in each province](#find-the-average-price-of-forsale-properties-in-each-province)
 
 ## Queries for Updating Tables
 
@@ -164,4 +165,18 @@ FROM (SELECT AVG(S.price) AS avg_price
 SELECT COUNT(property_id) AS num_properties
 FROM RentalDatabase.Sold
 WHERE YEAR(date_sold) = YEAR(CURDATE());
+```
+
+### Find the average price of `ForSale` properties in each province
+
+```sql
+SELECT
+  AvgPrices.avg_price,
+  AvgPrices.province
+FROM (SELECT
+        AVG(S.price) AS avg_price,
+        PC.province  AS province
+      FROM Property P, ForSale S, PostalCode PC
+      WHERE S.property_id = P.property_id AND P.postal_code = PC.postal_code
+      GROUP BY PC.province) AS AvgPrices;
 ```
